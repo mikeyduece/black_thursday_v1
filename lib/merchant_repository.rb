@@ -7,7 +7,7 @@ class MerchantRepository
   def initialize(file)
     handle = CSV.open file, headers: true, header_converters: :symbol
     @all = handle.map {|row| Merchant.new(row,self)}
-    # require "pry"; binding.pry
+    handle.close
   end
 
 

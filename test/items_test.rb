@@ -10,10 +10,23 @@ class ItemsTest < Minitest::Test
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,
                   :updated_at  => Time.now,})
+
     assert_instance_of Items, i
   end
 
+  def test_it_find_by_id
+    skip
+    i = Items.new({:name        => "Pencil",
+                  :id          => 1,
+                  :description => "You can use it to write things",
+                  :unit_price  => BigDecimal.new(10.99,4),
+                  :created_at  => Time.now,
+                  :updated_at  => Time.now,})
+    assert_equal 1, i.id
+  end
+
   def test_it_can_find_name
+    skip
     i = Items.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -23,6 +36,7 @@ class ItemsTest < Minitest::Test
   end
 
   def test_it_can_find_description
+    skip
     i = Items.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -32,6 +46,7 @@ class ItemsTest < Minitest::Test
   end
 
   def test_it_can_find_unit_price
+    skip
     i = Items.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -40,7 +55,20 @@ class ItemsTest < Minitest::Test
     assert_instance_of BigDecimal, i.unit_price
   end
 
+  def test_it_can_see_merchant_id
+    i = Items.new({:name        => "Pencil",
+                  :id => 1,
+                  :description => "You can use it to write things",
+                  :unit_price  => BigDecimal.new(10.99,4),
+                  :merchant_id => 321,
+                  :created_at  => Time.now,
+                  :updated_at  => Time.now,})
+                  require "pry"; binding.pry
+    assert_equal 321, i.merchant_id
+  end
+
   def test_can_it_tell_time
+    skip
     i = Items.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
