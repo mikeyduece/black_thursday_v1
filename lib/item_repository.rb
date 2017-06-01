@@ -14,7 +14,7 @@ class ItemRepository
   def open_all_items(filename)
     all_items = []
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
-      all_items << Items.new(row,self)
+      all_items << Item.new(row,self)
     end
     all_items
   end
