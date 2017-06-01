@@ -4,10 +4,10 @@ class Merchant
 
   attr_reader :name, :id
 
-  def initialize(params,parent=nil)
+  def initialize(params, merchant_repository = nil)
     @name = params[:name]
     @id = params[:id]
-
+    @merchant_repository = merchant_repository
   end
 
 end
