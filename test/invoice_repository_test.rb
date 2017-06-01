@@ -24,4 +24,9 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_it_can_find_all_customers_by_id
     assert_instance_of Array, ir.find_all_by_customer_id(20)
   end
+
+  def test_find_all_statuses
+    assert_instance_of Array, ir.find_all_by_status("pending")
+    assert_instance_of Array, ir.find_all_by_status("shipped")
+  end
 end

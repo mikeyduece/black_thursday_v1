@@ -38,10 +38,16 @@ class InvoiceRepository
     return all_customers
   end
 
-  def find_all_by_status
+  def find_all_by_status(status_input)
     #returns [] or matches to status
     all_statuses = []
-    
+    all.find_all do |invoice|
+      if invoice.status == status_input
+        all_statuses << invoice
+      end
+    end
+    return [] if all_statuses.empty?
+    return all_statuses
   end
 
   def find_all_by_merchant_id
