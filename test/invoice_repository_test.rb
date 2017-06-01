@@ -29,4 +29,8 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_instance_of Array, ir.find_all_by_status("pending")
     assert_instance_of Array, ir.find_all_by_status("shipped")
   end
+
+  def test_it_can_find_all_by_merchant_id
+    assert_instance_of Array, ir.find_all_by_merchant_id(12337139)
+  end
 end

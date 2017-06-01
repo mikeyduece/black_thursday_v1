@@ -59,7 +59,6 @@ class ItemTest < Minitest::Test
                   :merchant_id => 321,
                   :created_at  => Time.now,
                   :updated_at  => Time.now,})
-                  require "pry"; binding.pry
     assert_equal 321, i.merchant_id
 
   end
