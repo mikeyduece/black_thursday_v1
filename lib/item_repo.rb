@@ -1,15 +1,16 @@
 require 'csv'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require_relative '../lib/items'
+require_relative '../lib/item'
 
-class ItemsRepo
+class ItemRepo
 
   attr_reader :all
 
   def initialize(file)
     handle = CSV.open file, headers: true, header_converters: :symbol
-    @all = handle.map {|row| Items.new(row,self)}
+    @all = handle.map {|row| Item.new(row,self)}
+    require "pry"; binding.pry
   end
 
   def find_by_id(id)
@@ -57,20 +58,16 @@ class ItemsRepo
 
   end
 
-  def find_all_by_price_in_range(price_range)
-    prices_range = []
-    all.find do |item|
-      while item.unit_price.ceil(price_range)
-        prices_range << item
-        return item
-      end
-      nil
+  def find_all_by_price_in_range(range)
+    price_range = all.find_all do |item|
+      range.include?(item.unit_price)
+      # require "pry"; binding.pry
     end
-    return [] if prices_range.empty?
-    return prices_range
+    return [] if price_range.nil?
+    return price_range
   end
 
-  def find_all_by_item_id
+  def find_all_by_merchant_id
 
   end
 end
