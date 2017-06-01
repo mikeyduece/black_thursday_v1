@@ -1,5 +1,3 @@
-# require 'simplecov'
-# SimpleCov.start
 require './test/test_helper'
 require './lib/sales_engine'
 
@@ -9,7 +7,7 @@ class SalesEngineTest < Minitest::Test
                                :merchants => "./data/merchants.csv",})
     items     = se.items
     merchants = se.merchants
-    assert_instance_of ItemsRepo, items
+    assert_instance_of ItemRepository, items
     assert_instance_of MerchantRepository, merchants
   end
 
@@ -17,26 +15,69 @@ class SalesEngineTest < Minitest::Test
     se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                :merchants => "./data/merchants.csv",})
     items     = se.items
-    assert_instance_of Items, items.find_by_name("Glitter scrabble frames")
+    assert_instance_of Item, items.find_by_name("Glitter scrabble frames")
   end
 
   def test_it_can_find_id
     se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                :merchants => "./data/merchants.csv",})
     items     = se.items
-    assert_instance_of Items, items.find_by_id(263395617)
+    assert_instance_of Item, items.find_by_id(263395617)
   end
 
   def test_it_can_find_price
     se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                :merchants => "./data/merchants.csv",})
     items     = se.items
-    assert_instance_of Items, items.find_all_by_price(400.00)
+    assert_instance_of Item, items.find_all_by_price(400.00)
   end
 
   def test_it_can_find_description
     se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                :merchants => "./data/merchants.csv",})
     items     = se.items
+    assert_instance_of Array, items.find_all_with_description("More then 510+ icons")
+  end
+
+  def test_it_can_find_price_range
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    items     = se.items
+    assert_equal 62, items.find_all_by_price_in_range(1100..1300).length
+  end
+
+  def test_return_array_for_nil_range
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    items     = se.items
+    assert_equal [], items.find_all_by_price_in_range(0..0)
+  end
+
+  def test_it_find_merchant_id
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    items     = se.items
+    assert_instance_of Array, items.find_all_by_merchant_id(12334141)
+  end
+
+  def test_it_can_get_all_merchant
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    merchants = se.merchants
+    assert_instance_of Array, merchants.all
+  end
+
+  def test_it_can_get_merchants_names_through_merchant
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    merchants = se.merchants
+    assert_instance_of Merchant, merchants.find_by_name("Princessfrankknits")
+  end
+
+  def test_it_can_look_at_merchant_for_id
+    se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                               :merchants => "./data/merchants.csv",})
+    merch = se.merchants
+    assert_instance_of Merchant, merch.find_by_id(12334105)
   end
 end

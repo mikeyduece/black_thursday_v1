@@ -1,22 +1,22 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/items'
+require './lib/item'
 
-class ItemsTest < Minitest::Test
+class ItemTest < Minitest::Test
   def test_its_a_thing
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,
                   :updated_at  => Time.now,})
 
-    assert_instance_of Items, i
+    assert_instance_of Item, i
   end
 
   def test_it_find_by_id
     skip
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :id          => 1,
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -27,7 +27,7 @@ class ItemsTest < Minitest::Test
 
   def test_it_can_find_name
     skip
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,
@@ -37,7 +37,7 @@ class ItemsTest < Minitest::Test
 
   def test_it_can_find_description
     skip
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,
@@ -47,7 +47,7 @@ class ItemsTest < Minitest::Test
 
   def test_it_can_find_unit_price
     skip
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,
@@ -56,7 +56,7 @@ class ItemsTest < Minitest::Test
   end
 
   def test_it_can_see_merchant_id
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :id => 1,
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -70,7 +70,7 @@ class ItemsTest < Minitest::Test
 
   def test_can_it_tell_time
     skip
-    i = Items.new({:name        => "Pencil",
+    i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
                   :created_at  => Time.now,

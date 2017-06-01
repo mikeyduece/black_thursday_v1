@@ -1,16 +1,22 @@
 require 'csv'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require_relative '../lib/items'
+require_relative '../lib/item'
 
-class ItemsRepo
+class ItemRepository
 
   attr_reader :all
 
-  def initialize(file)
-    handle = CSV.open file, headers: true, header_converters: :symbol
-    @all = handle.map {|row| Items.new(row,self)}
-    handle.close
+  def initialize(filename)
+    @all = open_all_items(filename)
+  end
+
+  def open_all_items(filename)
+    all_items = []
+    CSV.foreach filename, headers: true, header_converters: :symbol do |row|
+      all_items << Items.new(row,self)
+    end
+    all_items
   end
 
   def find_by_id(id)
