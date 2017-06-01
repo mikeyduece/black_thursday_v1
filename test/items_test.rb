@@ -65,6 +65,7 @@ class ItemsTest < Minitest::Test
                   :updated_at  => Time.now,})
                   require "pry"; binding.pry
     assert_equal 321, i.merchant_id
+
   end
 
   def test_can_it_tell_time

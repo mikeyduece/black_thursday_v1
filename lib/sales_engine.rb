@@ -1,12 +1,16 @@
-require 'csv'
-# require_relative '../lib/merchant'
+require_relative '../lib/merchant_repository'
+require_relative '../lib/items_repo'
 
 class SalesEngine
 
   attr_reader :merchants, :items
 
+  def initialize(data)
+    @items     = ItemsRepo.new(data[:items])
+    @merchants = MerchantRepository.new(data[:merchants])
+  end
+
   def self.from_csv(data)
-    items = CSV.open "./data/merchants.csv",headers: true, header_converters: :symbol
-    merchants = CSV.open "./data/items.csv",headers: true, header_converters: :symbol
+    se = SalesEngine.new(data)
   end
 end

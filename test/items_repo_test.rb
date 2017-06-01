@@ -40,12 +40,12 @@ class ItemsRepoTest < Minitest::Test
 
   def test_find_all_by_price
     ir = ItemsRepo.new("./data/items.csv")
-    assert_instance_of Array, ir.find_all_by_unit_price(250)
+    assert_instance_of Items, ir.find_all_by_price(250)
   end
 
   def test_return_empty_array_for_bum_price
     ir = ItemsRepo.new("./data/items.csv")
-    assert_equal [], ir.find_all_by_unit_price(9999999999999999999999)
+    assert_equal [], ir.find_all_by_price(9999999999999999999999)
   end
 
   def test_can_it_find_range_of_prices
@@ -60,7 +60,7 @@ class ItemsRepoTest < Minitest::Test
 
   def test_it_can_find_range_of_merchant_id
     ir = ItemsRepo.new("./data/items.csv")
-    assert_equal "510+ RealPush Icon Set", ir.find_all_by_merchant_id(12334141).name
+    assert_instance_of Array, ir.find_all_by_merchant_id(12334141)
   end
 
 end

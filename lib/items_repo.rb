@@ -14,7 +14,6 @@ class ItemsRepo
   end
 
   def find_by_id(id)
-    # require "pry"; binding.pry
     all.find do |item|
       if item.id == id.to_s
         return item
@@ -45,10 +44,12 @@ class ItemsRepo
     return all_description
   end
 
-  def find_all_by_unit_price(price)
+  def find_all_by_price(price)
     prices = []
     all.find do |item|
-      while item.unit_price == price.to_f
+      # require "pry"; binding.pry
+      if item.unit_price == price
+        # require "pry"; binding.pry
         prices << item
         return item
       end
@@ -62,11 +63,11 @@ class ItemsRepo
   def find_all_by_price_in_range(range)
     price_range = []
       all.find_all do |item|
-      if range.include?(item.unit_price.to_f)
+      if range.include?(item.unit_price)
         price_range << item
       end
     end
-    return [] if price_range.nil?
+    return [] if price_range.empty?
     return price_range
   end
 
@@ -74,11 +75,11 @@ class ItemsRepo
     merchant_id_range = []
     all.find_all do |item|
       # require "pry"; binding.pry
-      if merch_id.include?(item.merchant_id)
+      if item.merchant_id == merch_id.to_s
         merchant_id_range << item
       end
     end
-    return [] if id_range.nil?
+    return [] if merchant_id_range.nil?
     return merchant_id_range
   end
 end
