@@ -17,7 +17,7 @@ class SalesEngine
   end
 
   def find_invoices(id)
-    invoices.find_all_by_merchant_id(id)
+    @invoices.find_all_by_merchant_id(id)
   end
 
   def find_merchants_by_id(id)

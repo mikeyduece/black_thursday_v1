@@ -6,14 +6,14 @@ class Merchant
               :id,
               :merchant_repository
 
-  def initialize(params, merchant_repository = nil)
+  def initialize(params, merchant_repository)
     @name = params[:name]
     @id = params[:id]
     @merchant_repository = merchant_repository
   end
 
   def invoices
-    merchant_repository.find_invoices(id)
+    @merchant_repository.merchant_repository_invoices(id)
   end
 
 
