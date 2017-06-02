@@ -14,5 +14,6 @@ class Merchant
 
   def invoices
     merchant_repository.find_invoices(id)
+    require "pry"; binding.pry
   end
 end

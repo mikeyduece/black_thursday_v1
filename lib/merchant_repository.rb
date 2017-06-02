@@ -20,6 +20,7 @@ class MerchantRepository
 
   def find_invoices(merchant_id)
     sales_engine.find_invoices(merchant_id)
+    require "pry"; binding.pry
   end
 
 

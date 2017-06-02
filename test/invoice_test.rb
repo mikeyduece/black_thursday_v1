@@ -34,4 +34,8 @@ class InvoiceTest < Minitest::Test
     assert_instance_of Time, i.created_at
     assert_instance_of Time, i.updated_at
   end
+
+  def test_it_can_see_parent
+    assert_equal 8, i.merchant
+  end
 end

@@ -20,6 +20,7 @@ class Invoice
 
   def merchant
     invoice_repository.find_merchant_by_id(merchant_id)
+    require "pry"; binding.pry
   end
 
 end

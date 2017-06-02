@@ -16,6 +16,11 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
+  def find_invoices(merchant_id)
+    invoices.find_all_by_merchant_id(merchant_id)
+    require "pry"; binding.pry
+  end
+
   def find_invoice_by_id(invoice_id)
     invoices.find_by_id(invoice_id)
   end

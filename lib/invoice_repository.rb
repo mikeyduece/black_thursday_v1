@@ -21,6 +21,7 @@ class InvoiceRepository
 
   def find_merchant_by_id(merchant_id)
     sales_engine.find_merchant_by_id(merchant_id)
+    require "pry"; binding.pry
   end
 
   def find_by_id(id)
