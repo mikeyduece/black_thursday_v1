@@ -10,7 +10,7 @@ class Merchant
     @name = params[:name]
     @id = params[:id]
     @merchant_repository = merchant_repository
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
   end
 
   def merchants

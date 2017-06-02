@@ -20,7 +20,7 @@ class InvoiceRepository
   end
 
   def find_by_id
-    sales_engine.
+    # sales_engine.
   end
 
 
