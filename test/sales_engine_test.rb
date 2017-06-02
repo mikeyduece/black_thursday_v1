@@ -103,6 +103,8 @@ class SalesEngineTest < Minitest::Test
     merchant.invoices
     assert_instance_of Array, merchant.invoices
     # require "pry"; binding.pry
+    assert_equal 14, merchant.invoices.length
+    # require "pry"; binding.pry
     invoice = se.invoices.find_by_id(20)
     assert_instance_of Merchant, invoice.merchant
   end

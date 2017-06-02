@@ -17,11 +17,10 @@ class SalesEngine
   end
 
   def find_invoices(merch_id)
-    # require "pry"; binding.pry
     invoices.find_all_by_merchant_id(merch_id)
   end
 
-  def find_merchants_by_id(id)
+  def find_merchants_by_invoice_id(id)
     merchants.find_by_id(id)
   end
 end

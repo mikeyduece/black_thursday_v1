@@ -19,7 +19,6 @@ class Invoice
   end
 
   def merchant
-    invoice_repository.find_merchants_by_id(id)
+    invoice_repository.invoice_repository_merchant(id)
   end
 end
-# require "pry"; binding.pry
