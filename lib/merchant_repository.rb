@@ -2,15 +2,31 @@ require 'csv'
 require_relative '../lib/merchant'
 class MerchantRepository
 
-  attr_reader :all
+  attr_reader :all,
+              :sales_engine
 
-  def initialize(file)
-    handle = CSV.open file, headers: true, header_converters: :symbol
-    @all = handle.map {|row| Merchant.new(row,self)}
-    handle.close
+  def initialize(filename, sales_engine = nil)
+    @sales_engine = sales_engine
+    @all_merchants = []
+    open_all_items(filename)
   end
 
+  def open_all_items(filename)
+    CSV.foreach filename, headers: true, header_converters: :symbol do |row|
+      @all_merchants  << Merchant.new(row,self)
+    end
+    @all_merchants
+  end
 
+  def all
+    @all_merchants
+  end
+
+  def merchant_repository_invoices(merch_id)
+    # require "pry"; binding.pry
+    sales_engine.find_invoices(merch_id)
+
+  end
 
   def find_by_id(id)
     all.find do |merchant|

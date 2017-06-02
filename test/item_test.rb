@@ -15,7 +15,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_find_by_id
-    skip
     i = Item.new({:name        => "Pencil",
                   :id          => 1,
                   :description => "You can use it to write things",
@@ -26,7 +25,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_can_find_name
-    skip
     i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -36,7 +34,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_can_find_description
-    skip
     i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -46,7 +43,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_can_find_unit_price
-    skip
     i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),
@@ -63,13 +59,11 @@ class ItemTest < Minitest::Test
                   :merchant_id => 321,
                   :created_at  => Time.now,
                   :updated_at  => Time.now,})
-                  require "pry"; binding.pry
     assert_equal 321, i.merchant_id
 
   end
 
   def test_can_it_tell_time
-    skip
     i = Item.new({:name        => "Pencil",
                   :description => "You can use it to write things",
                   :unit_price  => BigDecimal.new(10.99,4),

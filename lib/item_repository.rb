@@ -5,18 +5,23 @@ require_relative '../lib/item'
 
 class ItemRepository
 
-  attr_reader :all
+  attr_reader :all, :sales_engine
 
-  def initialize(filename)
-    @all = open_all_items(filename)
+  def initialize(filename, sales_engine=nil)
+    @sales_engine = sales_engine
+    @all_items = []
+    open_all_items(filename)
   end
 
   def open_all_items(filename)
-    all_items = []
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
-      all_items << Items.new(row,self)
+      @all_items << Item.new(row,self)
     end
-    all_items
+    @all_items
+  end
+
+  def all
+    @all_items
   end
 
   def find_by_id(id)
