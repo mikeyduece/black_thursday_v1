@@ -19,10 +19,10 @@ class InvoiceRepository
     all_items
   end
 
-  def find_merchant_by_id(merchant_id)
-    sales_engine.find_merchant_by_id(merchant_id)
-    require "pry"; binding.pry
+  def find_by_id
+    sales_engine.
   end
+
 
   def find_by_id(id)
     #returns nil or instance of invoice

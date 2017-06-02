@@ -16,11 +16,7 @@ class Invoice
     @created_at         = params[:created_at]
     @updated_at         = params[:updated_at]
     @invoice_repository = invoice_repository
-  end
-
-  def merchant
-    invoice_repository.find_merchant_by_id(merchant_id)
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
   end
 
 end

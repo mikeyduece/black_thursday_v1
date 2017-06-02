@@ -18,11 +18,6 @@ class MerchantRepository
     all_items
   end
 
-  def find_invoices(merchant_id)
-    sales_engine.find_invoices(merchant_id)
-    require "pry"; binding.pry
-  end
-
 
 
   def find_by_id(id)
