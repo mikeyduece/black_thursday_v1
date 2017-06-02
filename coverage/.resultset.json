@@ -23,6 +23,10 @@
         1,
         0,
         null,
+        null,
+        1,
+        0,
+        null,
         null
       ],
       "/Users/mikeheft/turing/1module/projects/black_thursday/lib/merchant_repository.rb": [
@@ -47,7 +51,9 @@
         null,
         null,
         1,
+        1,
         null,
+        1,
         null,
         null,
         1,
@@ -97,9 +103,8 @@
         475,
         null,
         null,
-        null,
         1,
-        0,
+        1,
         null,
         null,
         null,
@@ -245,7 +250,7 @@
         null,
         null,
         1,
-        null,
+        0,
         null,
         null,
         null,
@@ -319,10 +324,12 @@
         4985,
         null,
         null,
+        1,
+        0,
         null,
         null
       ]
     },
-    "timestamp": 1496407452
+    "timestamp": 1496411187
   }
 }

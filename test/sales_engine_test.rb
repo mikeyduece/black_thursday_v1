@@ -3,14 +3,7 @@ require './lib/sales_engine'
 
 class SalesEngineTest < Minitest::Test
 
-  # attr_reader :se
   #
-  # def setup
-  #   @se = SalesEngine.from_csv({:items     => "./data/items.csv",
-  #                              :merchants  => "./data/merchants.csv",
-  #                              :invoices   => "./data.invoices.csv"})
-  #
-  # end
   # def test_its_a_thing
   #   se = SalesEngine.from_csv({:items     => "./data/items.csv",
   #                              :merchants => "./data/merchants.csv",
@@ -102,19 +95,17 @@ class SalesEngineTest < Minitest::Test
   #   merch = se.merchants
   #   assert_instance_of Merchant, merch.find_by_id(12334105)
   # end
-
+  #
   def test_it_can_search_for_id
     se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                :merchants => "./data/merchants.csv",
                                :invoices => "./data/invoices.csv"})
     merchant = se.merchants.find_by_id(12334145)
     merchant.invoices
-    # require "pry"; binding.pry
     # => [<invoice>, <invoice>, <invoice>]
-    # require "pry"; binding.pry
     assert_instance_of Array, merchant.invoices
-    # invoice = se.invoices.find_by_id(20)
-    # assert_instance_of Merchant, invoice.merchant
+    invoice = se.invoices.find_by_id(20)
+    assert_instance_of Merchant, invoice.merchant
     # => <merchant>
   end
 end
