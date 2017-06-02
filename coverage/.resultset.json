@@ -25,7 +25,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null
       ],
@@ -51,7 +51,7 @@
         null,
         null,
         1,
-        1,
+        2,
         null,
         null,
         1,
@@ -61,11 +61,11 @@
         null,
         null,
         1,
-        1,
-        10,
-        1,
+        2,
+        383,
+        2,
         null,
-        9,
+        381,
         null,
         null,
         null,
@@ -242,7 +242,6 @@
         null,
         1,
         null,
-        null,
         1,
         1,
         1,
@@ -257,7 +256,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         null,
@@ -306,8 +305,6 @@
         3,
         null,
         null,
-        null,
-        null,
         null
       ],
       "/Users/mikeheft/turing/1module/projects/black_thursday/lib/invoice.rb": [
@@ -332,11 +329,12 @@
         null,
         null,
         1,
-        0,
+        null,
+        1,
         null,
         null
       ]
     },
-    "timestamp": 1496429410
+    "timestamp": 1496432093
   }
 }
