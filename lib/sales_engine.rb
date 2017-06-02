@@ -15,4 +15,12 @@ class SalesEngine
   def self.from_csv(data)
     se = SalesEngine.new(data)
   end
+
+  def find_invoice_by_id(invoice_id)
+    invoices.find_by_id(invoice_id)
+  end
+
+  def find_merchant_by_id(merchant_id)
+    merchants.find_by_id(merchant_id)
+  end
 end

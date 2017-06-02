@@ -110,7 +110,7 @@ class SalesEngineTest < Minitest::Test
 
     invoice = se.invoices.find_by_id(20)
     merchant = se.merchants.find_by_id(12334159)
-    # assert_instance_of Invoice,  merchant.invoice
+    assert_instance_of Invoice,  merchant.invoice
     assert_instance_of Merchant, invoice.merchant
 
   end

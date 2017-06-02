@@ -18,8 +18,8 @@ class Invoice
     @invoice_repository = invoice_repository
   end
 
-  def merchant(merchant_id)
-    invoice_repository.find_all_by_merchant_id(merchant_id)
+  def merchant
+    invoice_repository.find_merchant_by_id(merchant_id)
   end
 
 end

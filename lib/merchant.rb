@@ -2,7 +2,9 @@ require 'csv'
 
 class Merchant
 
-  attr_reader :name, :id
+  attr_reader :name,
+              :id,
+              :merchant_repository
 
   def initialize(params, merchant_repository = nil)
     @name = params[:name]
@@ -10,4 +12,7 @@ class Merchant
     @merchant_repository = merchant_repository
   end
 
+  def invoices
+    merchant_repository.find_invoices(id)
+  end
 end

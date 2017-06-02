@@ -2,10 +2,12 @@ require 'csv'
 require_relative '../lib/merchant'
 class MerchantRepository
 
-  attr_reader :all
+  attr_reader :all,
+              :sales_engine
 
-  def initialize(filename)
+  def initialize(filename, sales_engine = nil)
     @all = open_all_items(filename)
+    @sales_engine = sales_engine
   end
 
   def open_all_items(filename)
@@ -14,6 +16,10 @@ class MerchantRepository
       all_items << Merchant.new(row,self)
     end
     all_items
+  end
+
+  def find_invoices(merchant_id)
+    sales_engine.find_invoices(merchant_id)
   end
 
 
