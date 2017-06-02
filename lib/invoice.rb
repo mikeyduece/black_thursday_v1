@@ -22,3 +22,4 @@ class Invoice
     invoice_repository.find_merchants_by_id(id)
   end
 end
+# require "pry"; binding.pry

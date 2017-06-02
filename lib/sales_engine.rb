@@ -7,7 +7,7 @@ class SalesEngine
   attr_reader :merchants, :items, :invoices
 
   def initialize(data)
-    # @items     = ItemRepository.new(data[:items],self)
+    @items     = ItemRepository.new(data[:items],self)
     @merchants = MerchantRepository.new(data[:merchants],self)
     @invoices  = InvoiceRepository.new(data[:invoices],self)
   end
@@ -18,7 +18,7 @@ class SalesEngine
 
   def find_invoices(merch_id)
     # require "pry"; binding.pry
-    @invoices.find_all_by_merchant_id(merch_id)
+    invoices.find_all_by_merchant_id(merch_id)
   end
 
   def find_merchants_by_id(id)
