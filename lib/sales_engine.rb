@@ -7,9 +7,9 @@ class SalesEngine
   attr_reader :merchants, :items, :invoices
 
   def initialize(data)
-    @items     = ItemRepository.new(data[:items])
-    @merchants = MerchantRepository.new(data[:merchants])
-    @invoices  = InvoiceRepository.new(data[:invoices])
+    # @items     = ItemRepository.new(data[:items],self)
+    @merchants = MerchantRepository.new(data[:merchants],self)
+    @invoices  = InvoiceRepository.new(data[:invoices],self)
   end
 
   def self.from_csv(data)
@@ -17,6 +17,7 @@ class SalesEngine
   end
 
   def find_invoices(merch_id)
+    # require "pry"; binding.pry
     @invoices.find_all_by_merchant_id(merch_id)
   end
 

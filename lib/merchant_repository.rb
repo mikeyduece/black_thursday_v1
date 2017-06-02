@@ -7,23 +7,23 @@ class MerchantRepository
 
   def initialize(filename, sales_engine = nil)
     @sales_engine = sales_engine
-    @all_items = []
+    @all_merchants = []
     open_all_items(filename)
   end
 
   def open_all_items(filename)
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
-      @all_items << Merchant.new(row,self)
+      @all_merchants  << Merchant.new(row,self)
     end
-    @all_items
+    @all_merchants
   end
 
   def all
-    @all_items
+    @all_merchants
   end
 
   def merchant_repository_invoices(merch_id)
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
     @sales_engine.find_invoices(merch_id)
 
   end
