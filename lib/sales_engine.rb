@@ -16,8 +16,8 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
-  def find_invoices(id)
-    @invoices.find_all_by_merchant_id(id)
+  def find_invoices(merch_id)
+    @invoices.find_all_by_merchant_id(merch_id)
   end
 
   def find_merchants_by_id(id)

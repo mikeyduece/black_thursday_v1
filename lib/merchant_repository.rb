@@ -22,8 +22,9 @@ class MerchantRepository
     @all_items
   end
 
-  def merchant_repository_invoices(id)
-    @sales_engine.find_invoices(id)
+  def merchant_repository_invoices(merch_id)
+    require "pry"; binding.pry
+    @sales_engine.find_invoices(merch_id)
 
   end
 
