@@ -9,8 +9,10 @@ module Stats
     info.map {|num| (num-average)**2}
   end
 
-  def standard_deviation
-    Math.sqrt(average(variance))
+  def standard_deviation(info)
+    mean = average(info)
+    var = variance(info)
+    Math.sqrt(avg(var))
   end
 
   def average_invoices_per_merchant
@@ -30,6 +32,6 @@ module Stats
   end
 
   def average_invoices_per_merchant_standard_deviation
-    
+    standard_deviation
   end
 end
