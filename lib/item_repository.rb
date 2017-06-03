@@ -24,7 +24,7 @@ class ItemRepository
     @all_items
   end
 
-  def item_repository_items
+  def item_repository_items(id)
     sales_engine.find_items(id)
   end
 
