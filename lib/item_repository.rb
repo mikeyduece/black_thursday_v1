@@ -1,7 +1,7 @@
 require 'csv'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require_relative '../lib/item'
+require_relative 'item'
 
 class ItemRepository
 

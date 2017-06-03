@@ -29,11 +29,11 @@ class InvoiceRepository
       if invoice.id == id.to_s
         return invoice
       end
+      nil
     end
   end
 
   def find_all_by_customer_id(customer_id)
-    #returns [] or matches to customer_id
     all_customers = []
     all.find_all do |invoice|
       if invoice.customer_id == customer_id.to_s
