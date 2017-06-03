@@ -21,4 +21,8 @@ class Invoice
   def merchant
     invoice_repository.invoice_repository_merchant(self.merchant_id)
   end
+
+  def items
+    invoice_repository.invoice_repository_items(self.id)
+  end
 end

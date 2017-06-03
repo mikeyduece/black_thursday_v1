@@ -13,10 +13,8 @@ class SalesEngineTest < Minitest::Test
                                 :transactions  => "./data/test_transactions.csv",
                                 :customers     => "./data/test_customers.csv"})
 
-    end
-    # se = SalesEngine.from_csv({:items     => "./data/items.csv",
-    #   :merchants => "./data/merchants.csv",
-    #   :invoices  => "./data/invoices.csv"})
+  end
+
   def test_its_a_thing
 
     items     = se.items
@@ -89,5 +87,21 @@ class SalesEngineTest < Minitest::Test
     item = se.items.find_by_id(263395237)
     assert_instance_of Array, merchant.items
     assert_instance_of Merchant, item.merchant
+  end
+
+  def test_invoice_can_talk_to_items
+    invoice = se.invoices.find_by_id(20)
+    assert_instance_of Array, invoice.items
+    # assert_equal 4, invoice.items.length
+  end
+  def test_invoice_can_talk_to_transactions
+    invoice = se.invoices.find_by_id(20)
+    assert_instance_of Arary, invoice.transactions
+    assert_equal 5, invoice.transactions.length
+  end
+  def test_invoice_can_talk_to_customer
+    skip
+    invoice = se.invoices.find_by_id(20)
+    assert_instance_of Customer, invoice.customer # => customer
   end
 end

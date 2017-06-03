@@ -3,7 +3,7 @@ require_relative '../lib/invoice'
 
 class InvoiceRepository
 
-  attr_reader :all
+  attr_reader :all, :sales_engine
 
   def initialize(filename, sales_engine = nil)
     @all =open_all_items(filename)
@@ -20,6 +20,10 @@ class InvoiceRepository
 
   def invoice_repository_merchant(id)
     @sales_engine.find_merchants_by_invoice_id(id)
+  end
+
+  def invoice_repository_items(id)
+    @sales_engine.find_items_by_invoice(id)
   end
 
 
