@@ -24,6 +24,10 @@ class ItemRepository
     @all_items
   end
 
+  def item_repository_items
+    sales_engine.find_items(id)
+  end
+
   def find_by_id(id)
     all.find do |item|
       if item.id == id.to_s

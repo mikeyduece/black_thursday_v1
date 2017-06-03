@@ -19,4 +19,8 @@ class Item
     unit_price / 100
   end
 
+  def merchants
+    item_repository.item_repository_items(id)
+  end
+
 end
