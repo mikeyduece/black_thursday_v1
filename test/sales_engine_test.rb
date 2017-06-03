@@ -74,11 +74,17 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of Merchant, merch.find_by_id(12334105)
   end
 
-  def test_it_can_search_for_id
+  def test_it_can_search_for_merchant_and_invoice_id
     merchant = se.merchants.find_by_id(12334145)
     invoice = se.invoices.find_by_id(20)
     assert_equal 14, merchant.invoices.length
     assert_instance_of Array, merchant.invoices
     assert_instance_of Merchant, invoice.merchant
+  end
+
+  def test_it_can_search_for_merchant_and_item_id
+    merchant = se.merchants.find_by_id(12334112)
+    assert_instance_of Array, merchant.items
+
   end
 end
