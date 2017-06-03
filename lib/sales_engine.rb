@@ -24,7 +24,4 @@ class SalesEngine
     @merchants.find_by_id(id)
   end
 
-  def all_merchants
-    merchants.all
-  end
 end
