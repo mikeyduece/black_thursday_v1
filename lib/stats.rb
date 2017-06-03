@@ -1,4 +1,5 @@
-Module Stats
+module Stats
+
   def average(info)
     (info.reduce(:+)/info.count.to_f).round(2)
   end
