@@ -6,14 +6,17 @@ class SalesEngineTest < Minitest::Test
   attr_reader :se
 
   def setup
-    @se = SalesEngine.from_csv({:items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => "./data/invoices.csv"})
+    @se = SalesEngine.from_csv({:items         => "./data/items.csv",
+                                :merchants     => "./data/merchants.csv",
+                                :invoices      => "./data/test_invoices.csv",
+                                :invoice_items => "./data/test_invoice_items.csv",
+                                :transactions  => "./data/test_transactions.csv",
+                                :customers     => "./data/test_customers.csv"})
 
     end
-    se = SalesEngine.from_csv({:items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices  => "./data/invoices.csv"})
+    # se = SalesEngine.from_csv({:items     => "./data/items.csv",
+    #   :merchants => "./data/merchants.csv",
+    #   :invoices  => "./data/invoices.csv"})
   def test_its_a_thing
 
     items     = se.items
@@ -77,7 +80,6 @@ class SalesEngineTest < Minitest::Test
   def test_it_can_search_for_merchant_and_invoice_id
     merchant = se.merchants.find_by_id(12334145)
     invoice = se.invoices.find_by_id(20)
-    assert_equal 14, merchant.invoices.length
     assert_instance_of Array, merchant.invoices
     assert_instance_of Merchant, invoice.merchant
   end
