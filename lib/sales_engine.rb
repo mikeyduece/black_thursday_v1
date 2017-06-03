@@ -25,7 +25,7 @@ class SalesEngine
   end
 
   def find_items_by_merchant_id(id)
-    items.find_by_id(id)
+    items.find_all_by_merchant_id(id)
   end
 
   def find_items(id)
