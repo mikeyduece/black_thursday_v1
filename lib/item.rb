@@ -20,7 +20,7 @@ class Item
   end
 
   def merchant
-    item_repository.item_repository_items(id)
+    item_repository.item_repository_items(self.merchant_id)
   end
 
 end
