@@ -23,7 +23,7 @@ class Invoice
   end
 
   def items
-    invoice_repository.invoice_repository_items(self.id)
+    invoice_repository.invoice_repository_items(self.merchant_id)
   end
 
   def transactions
@@ -36,5 +36,16 @@ class Invoice
 
   def invoice_items
     invoice_repository.get_invoice_items_for_invoice(id)
+  end
+
+  def total
+    total = invoice_items.map do |invoice_item|
+      invoice_item.unit_price * invoice_item.quantity
+    end.reduce(:+)
+    return total.round(2) if total && paid_in_full?
+  end
+
+  def paid_in_full?
+    
   end
 end
