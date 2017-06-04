@@ -41,8 +41,10 @@ class Invoice
   def total
     total = invoice_items.map do |invoice_item|
       invoice_item.unit_price * invoice_item.quantity
+      # require "pry"; binding.pry
     end.reduce(:+)
     return total.round(2) if total && self.is_paid_in_full?
+
   end
 
   def transaction_result
