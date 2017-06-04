@@ -23,8 +23,9 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
-  def find_invoice_items_for_invoice(id)
-    invoice_items.find_all_by_invoice_id(id)
+  def find_invoice_items_for_invoice(invoice_id)
+    # require "pry"; binding.pry
+    invoice_items.find_all_by_invoice_id(invoice_id)
   end
 
   def find_customers(merchant_id)
@@ -42,7 +43,7 @@ class SalesEngine
   end
 
   def find_items_by_invoice(id)
-    invoice_items.find_all_by_invoice_id(id)
+    items.find_all_by_merchant_id(id)
   end
 
   def find_invoices(merch_id)

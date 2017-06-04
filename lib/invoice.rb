@@ -41,11 +41,17 @@ class Invoice
   def total
     total = invoice_items.map do |invoice_item|
       invoice_item.unit_price * invoice_item.quantity
+      # require "pry"; binding.pry
     end.reduce(:+)
-    return total.round(2) if total && paid_in_full?
+    return total.round(2) if total && self.is_paid_in_full?
+
   end
 
-  def paid_in_full?
-    
+  def transaction_result
+    invoice_repository.find_transaction_result(id)
+  end
+
+  def is_paid_in_full?
+    transaction_result.any? {|transaction| transaction.result == "success"}
   end
 end
