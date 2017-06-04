@@ -61,34 +61,35 @@ class SalesAnalyst
   end
 
   def average_price_per_merchant
-
-
-    # returns sums all merchants price averages and averages them
-    #returns BigDecimal
-
+    prices_avgs = merch_id_array.map { |id| average_item_price_per_merchant(id)}
+    avg_ppm = prices_avgs.reduce(:+) / prices_avgs.length
+    avg_ppm
   end
 
   def golden_items
-    #returns array of item objects two (at least?) two standard deviations above
-    #the average item price.
+    prices_avgs = merch_id_array.map { |id| average_item_price_per_merchant(id)}
+    price_bar = standard_deviation(prices_avgs) * 2
+    golden_items = []
+    @item_repository.all.each do |item|
+      if item.unit_price > price_bar
+        golden_items << item
+      else
+      end
+    end
+    golden_items
   end
 
-
-
-
-
+#private?
 
   def num_items_per_merchant
-    merch_id_array = []
-    @merchant_repository.all.each do |merch|
-      merch_id_array << merch.id
-    end
+    merch_ids = merch_id_array
       arr_n_items_by_merch =  []
-      merch_id_array.each do |id|
+      merch_ids.each do |id|
       arr_n_items_by_merch << @item_repository.find_all_by_merchant_id(id).length
     end
     arr_n_items_by_merch
   end
+
 
   def merch_with_num_of_items_hash
     merch_name_array = []
@@ -99,8 +100,11 @@ class SalesAnalyst
     hash = Hash[nested_arr]
   end
 
+  def merch_id_array
+    merch_id_array = []
+    @merchant_repository.all.each do |merch|
+      merch_id_array << merch.id
+    end
+    merch_id_array
+  end
 end
-
-# #
-# instance = SalesAnalyst.new
-# require'pry'; binding.pry
