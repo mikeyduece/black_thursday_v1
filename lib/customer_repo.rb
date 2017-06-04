@@ -17,6 +17,10 @@ class CustomerRepo
     @all_customers
   end
 
+  def find_customers_merchants(customer_id)
+    
+  end
+
   def all
     @all_customers
   end
