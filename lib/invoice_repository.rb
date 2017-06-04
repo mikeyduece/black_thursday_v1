@@ -38,6 +38,10 @@ class InvoiceRepository
     sales_engine.find_customer_invoice(customer_id)
   end
 
+  def find_transaction_result(invoice_id)
+    sales_engine.find_transactions_by_invoice_id(invoice_id)
+  end
+
 
   def find_by_id(id)
     all.find do |invoice|

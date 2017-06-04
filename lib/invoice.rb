@@ -45,7 +45,11 @@ class Invoice
     return total.round(2) if total && paid_in_full?
   end
 
+  def transaction_result(id)
+    invoice_repository.find_transaction_result(id)
+  end
+
   def paid_in_full?
-    
+    transaction_result.any? {|transaction| transaction.result == "success"}
   end
 end
