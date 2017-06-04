@@ -28,9 +28,9 @@ class SalesEngine
     customer_array.map {|invoice| invoice.customer}
   end
 
-  def find_merchants_of_customers(id)
+  def find_merchants_of_customers(customer_id)
     merchant_array = invoices.find_all_by_customer_id(customer_id)
-    
+    merchant_array.map {|invoice| invoice.merchant}
   end
 
   def find_transaction_invoice_by_id(id)
