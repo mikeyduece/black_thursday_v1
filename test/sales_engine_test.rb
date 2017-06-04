@@ -92,12 +92,12 @@ class SalesEngineTest < Minitest::Test
   def test_invoice_can_talk_to_items
     invoice = se.invoices.find_by_id(20)
     assert_instance_of Array, invoice.items
-    # assert_equal 4, invoice.items.length
   end
   def test_invoice_can_talk_to_transactions
     invoice = se.invoices.find_by_id(46)
     assert_instance_of Array, invoice.transactions
     assert_equal 1, invoice.transactions.length
+    assert_instance_of Transaction, invoice.transactions[0]
   end
   def test_invoice_can_talk_to_customer
     invoice = se.invoices.find_by_id(21)
@@ -112,10 +112,18 @@ class SalesEngineTest < Minitest::Test
   def test_merchants_can_talk_to_customers
     merchant = se.merchants.find_by_id(12335938)
     assert_instance_of Array, merchant.customers
+    assert_instance_of Customer, merchant.customers[0]
   end
 
   def test_customer_can_talk_to_merchant
     customer = se.customers.find_by_id(21)
     assert_instance_of Array, customer.merchants
+    assert_instance_of Merchant, customer.merchants[0]
+  end
+
+  def test_invoice_can_talke_to_invoice_item
+    invoice = se.invoices.find_by_id(15)
+    assert_instance_of Array, invoice.invoice_items
+    assert_instance_of InvoiceItem, invoice.invoice_items[0]
   end
 end

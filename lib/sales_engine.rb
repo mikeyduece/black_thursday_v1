@@ -23,6 +23,10 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
+  def find_invoice_items_for_invoice(id)
+    invoice_items.find_all_by_invoice_id(id)
+  end
+
   def find_customers(merchant_id)
     customer_array = invoices.find_all_by_merchant_id(merchant_id)
     customer_array.map {|invoice| invoice.customer}

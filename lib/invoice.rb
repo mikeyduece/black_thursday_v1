@@ -33,4 +33,8 @@ class Invoice
   def customer
     invoice_repository.customer_invoices(self.customer_id)
   end
+
+  def invoice_items
+    invoice_repository.get_invoice_items_for_invoice(id)
+  end
 end

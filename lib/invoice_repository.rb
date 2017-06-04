@@ -18,6 +18,10 @@ class InvoiceRepository
     all_items
   end
 
+  def get_invoice_items_for_invoice(id)
+    sales_engine.find_invoice_items_for_invoice(id)
+  end
+
   def invoice_repository_merchant(id)
     @sales_engine.find_merchants_by_invoice_id(id)
   end
