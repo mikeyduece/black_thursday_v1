@@ -105,7 +105,7 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_can_transaction_talk_to_invoice
-    transaction = se.transactions.find_by_id(46)
+    transaction = se.transactions.find_by_id(40)
     assert_instance_of Invoice, transaction.invoice
   end
 end
