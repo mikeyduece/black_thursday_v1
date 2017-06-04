@@ -2,18 +2,19 @@ require_relative '../lib/merchant_repository'
 require_relative '../lib/item_repository'
 require_relative '../lib/invoice_repository'
 require_relative '../lib/invoice_item_repo'
+require_relative '../lib/transaction_repo'
 
 class SalesEngine
 
   attr_reader :merchants, :items, :invoices,
-              :transactions, :customers, :invoice_items
+              :transactions, :customers, :invoice_items, :transactions
 
   def initialize(data)
-    @items        = ItemRepository.new(data[:items],self)
-    @merchants    = MerchantRepository.new(data[:merchants],self)
-    @invoices     = InvoiceRepository.new(data[:invoices],self)
+    @items         = ItemRepository.new(data[:items],self)
+    @merchants     = MerchantRepository.new(data[:merchants],self)
+    @invoices      = InvoiceRepository.new(data[:invoices],self)
     @invoice_items = InvoiceItemRepo.new(data[:invoice_items],self)
-    # @transactions = TransactionRepo.new(data[:transactions],self)
+    @transactions  = TransactionRepo.new(data[:transactions],self)
     # @customers    = CustomerRepo.new(data[:customers],self)
   end
 
@@ -35,6 +36,10 @@ class SalesEngine
 
   def find_items_by_merchant_id(id)
     items.find_all_by_merchant_id(id)
+  end
+
+  def find_transactions_by_invoice_id(invoice_id)
+    transactions.find_all_by_invoice_id(invoice_id)
   end
 
   def find_items(id)

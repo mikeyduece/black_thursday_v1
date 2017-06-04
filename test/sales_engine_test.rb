@@ -95,12 +95,11 @@ class SalesEngineTest < Minitest::Test
     # assert_equal 4, invoice.items.length
   end
   def test_invoice_can_talk_to_transactions
-    invoice = se.invoices.find_by_id(20)
-    assert_instance_of Arary, invoice.transactions
-    assert_equal 5, invoice.transactions.length
+    invoice = se.invoices.find_by_id(46)
+    assert_instance_of Array, invoice.transactions
+    assert_equal 1, invoice.transactions.length
   end
   def test_invoice_can_talk_to_customer
-    skip
     invoice = se.invoices.find_by_id(20)
     assert_instance_of Customer, invoice.customer # => customer
   end
