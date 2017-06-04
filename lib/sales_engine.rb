@@ -16,6 +16,7 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
+  def
   def find_invoices(merch_id)
     invoices.find_all_by_merchant_id(merch_id)
   end
