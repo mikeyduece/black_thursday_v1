@@ -36,7 +36,6 @@ class InvoiceRepository
 
 
   def find_by_id(id)
-    #returns nil or instance of invoice
     all.find do |invoice|
       if invoice.id == id.to_s
         return invoice

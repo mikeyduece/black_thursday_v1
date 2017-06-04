@@ -1,7 +1,7 @@
 class Transaction
 
   attr_reader :id, :invoice_id, :cc_num, :result,
-              :cc_exp, :created_at, :updated_at
+              :cc_exp, :created_at, :updated_at, :transaction_repo
 
   def initialize(params, transaction_repo = nil)
     @id         = params[:id]
@@ -12,6 +12,10 @@ class Transaction
     @updated_at = params[:updated_at]
     @result     = params[:result]
     @transaction_repo = transaction_repo
+  end
+
+  def invoice
+    transaction_repo.transaction_invoice(self.invoice_id)
   end
 
 

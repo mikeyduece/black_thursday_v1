@@ -21,6 +21,10 @@ class TransactionRepo
     @all_transactions
   end
 
+  def transaction_invoice(invoice_id)
+    sales_engine.find_transaction_invoice_by_id(invoice_id)
+  end
+
   def find_by_id(id)
     all.find do |transaction|
       if transaction.id == id.to_s
