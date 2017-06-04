@@ -30,6 +30,10 @@ class MerchantRepository
     sales_engine.find_items_by_merchant_id(id)
   end
 
+  def find_merchants_customers(id)
+    sales_engine.find_customers(id)
+  end
+
   def find_by_id(id)
     all.find do |merchant|
       if merchant.id == id.to_s

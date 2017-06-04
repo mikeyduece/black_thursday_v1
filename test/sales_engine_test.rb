@@ -108,4 +108,10 @@ class SalesEngineTest < Minitest::Test
     transaction = se.transactions.find_by_id(40)
     assert_instance_of Invoice, transaction.invoice
   end
+
+  def test_merchants_can_talk_to_customers
+    merchant = se.merchants.find_by_id(12335938)
+    assert_instance_of Array, merchant.customers 
+
+  end
 end

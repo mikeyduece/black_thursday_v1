@@ -23,6 +23,10 @@ class SalesEngine
     se = SalesEngine.new(data)
   end
 
+  def find_customers(id)
+    customers.find_by_id(id)
+  end
+
   def find_transaction_invoice_by_id(id)
     invoices.find_by_id(id)
   end
