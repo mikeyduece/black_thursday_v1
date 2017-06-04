@@ -29,4 +29,8 @@ class Invoice
   def transactions
     invoice_repository.invoice_transactions(self.id)
   end
+
+  def customer
+    invoice_repository.customer_invoices(self.customer_id)
+  end
 end

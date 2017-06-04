@@ -100,7 +100,7 @@ class SalesEngineTest < Minitest::Test
     assert_equal 1, invoice.transactions.length
   end
   def test_invoice_can_talk_to_customer
-    invoice = se.invoices.find_by_id(20)
-    assert_instance_of Customer, invoice.customer # => customer
+    invoice = se.invoices.find_by_id(21)
+    assert_instance_of Customer, invoice.customer
   end
 end

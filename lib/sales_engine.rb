@@ -3,6 +3,7 @@ require_relative '../lib/item_repository'
 require_relative '../lib/invoice_repository'
 require_relative '../lib/invoice_item_repo'
 require_relative '../lib/transaction_repo'
+require_relative '../lib/customer_repo'
 
 class SalesEngine
 
@@ -15,7 +16,7 @@ class SalesEngine
     @invoices      = InvoiceRepository.new(data[:invoices],self)
     @invoice_items = InvoiceItemRepo.new(data[:invoice_items],self)
     @transactions  = TransactionRepo.new(data[:transactions],self)
-    # @customers    = CustomerRepo.new(data[:customers],self)
+    @customers     = CustomerRepo.new(data[:customers],self)
   end
 
   def self.from_csv(data)
@@ -40,6 +41,10 @@ class SalesEngine
 
   def find_transactions_by_invoice_id(invoice_id)
     transactions.find_all_by_invoice_id(invoice_id)
+  end
+
+  def find_customer_invoice(customer_id)
+    customers.find_by_id(customer_id)
   end
 
   def find_items(id)

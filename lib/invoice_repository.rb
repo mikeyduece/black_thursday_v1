@@ -30,6 +30,10 @@ class InvoiceRepository
     sales_engine.find_transactions_by_invoice_id(invoice_id)
   end
 
+  def customer_invoices(customer_id)
+    sales_engine.find_customer_invoice(customer_id)
+  end
+
 
   def find_by_id(id)
     #returns nil or instance of invoice
