@@ -29,9 +29,9 @@ class SalesAnalyst
     @merchant_repository
   end
 
-  def average_items_per_merchant #refactor
-    total_items = ItemRepository.new("./data/items.csv").all
-    total_merchants = MerchantRepository.new("./data/merchants.csv").all
+  def average_items_per_merchant #REFACTOR FIRST
+    total_items = @item_repository.all
+    total_merchants = @merchant_repository.all
     average_items = total_items.count.to_f / total_merchants.count.to_f
     average_items.round(2)
   end
@@ -82,6 +82,7 @@ class SalesAnalyst
   end
 
   # **** The following functionality need to be added to SE as per spec ****
+
 
   def num_items_per_merchant
     merch_ids = merch_id_array

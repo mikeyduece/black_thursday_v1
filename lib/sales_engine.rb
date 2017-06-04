@@ -24,3 +24,9 @@ class SalesEngine
     @merchants.find_by_id(id)
   end
 end
+
+
+se = SalesEngine.from_csv({:items     => "./data/items.csv",
+                             :merchants => "./data/merchants.csv",
+                             :invoices => "./data/invoices.csv"})
+require 'pry'; binding.pry
