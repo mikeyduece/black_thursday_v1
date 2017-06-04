@@ -1,7 +1,7 @@
 require 'csv'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require_relative '../lib/item'
+require_relative 'item'
 
 class ItemRepository
 
@@ -22,6 +22,10 @@ class ItemRepository
 
   def all
     @all_items
+  end
+
+  def item_repository_items(id)
+    sales_engine.find_items(id)
   end
 
   def find_by_id(id)
