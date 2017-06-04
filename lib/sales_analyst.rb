@@ -11,13 +11,15 @@ class SalesAnalyst
 
   include Stats
 
-  def initialize #this takes sales enigine as an argument
+  def initialize #refactor to only use se
     @se =   se = SalesEngine.from_csv({:items     => "./data/items.csv",
                                  :merchants => "./data/merchants.csv",
                                  :invoices => "./data/invoices.csv"})
     @item_repository = ItemRepository.new("./data/items.csv")
     @merchant_repository = MerchantRepository.new("./data/merchants.csv")
   end
+
+# initialize needs to be simplified  ^^
 
   def item_repository
     @item_repository
@@ -79,7 +81,7 @@ class SalesAnalyst
     golden_items
   end
 
-#private?
+  # **** The following functionality need to be added to SE as per spec ****
 
   def num_items_per_merchant
     merch_ids = merch_id_array
