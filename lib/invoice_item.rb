@@ -8,8 +8,8 @@ class InvoiceItem
     @id = params[:id]
     @item_id = params[:item_id]
     @invoice_id = params[:invoice_id]
-    @quantity = params[:quantity]
-    @unit_price = params[:unit_price]
+    @quantity = params[:quantity].to_i 
+    @unit_price = params[:unit_price].to_i
     @created_at = params[:created_at]
     @updated_at = params[:updated_at]
   end

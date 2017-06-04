@@ -128,4 +128,16 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of Array, invoice.invoice_items
     assert_instance_of InvoiceItem, invoice.invoice_items[0]
   end
+
+  def test_it_can_see_if_fully_paid
+    invoice = se.invoices.find_by_id(46)
+    assert invoice.is_paid_in_full?
+  end
+
+  def test_it_can_see_who_has_not_paid
+    invoice = se.invoices.find_by_id(1752)
+    refute invoice.is_paid_in_full?
+  end
+
+  
 end
