@@ -111,7 +111,10 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchants_can_talk_to_customers
     merchant = se.merchants.find_by_id(12335938)
-    assert_instance_of Array, merchant.customers 
+    assert_instance_of Array, merchant.customers
+  end
+
+  def 
 
   end
 end

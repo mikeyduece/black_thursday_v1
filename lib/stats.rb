@@ -46,11 +46,11 @@ module Stats
   end
 
   def invoice_day
-    invoices.map {|invoice| Date::DAYNAMES [invoice.created_at.wday]}
+    invoices.map {|invoice| Date::DAYNAMES[invoice.created_at.wday]}
   end
 
   def invoice_status
-    
+
   end
 
 end
