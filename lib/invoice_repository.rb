@@ -3,7 +3,7 @@ require_relative '../lib/invoice'
 
 class InvoiceRepository
 
-  attr_reader :all
+  attr_reader :all, :sales_engine
 
   def initialize(filename, sales_engine = nil)
     @all =open_all_items(filename)
@@ -18,22 +18,37 @@ class InvoiceRepository
     all_items
   end
 
+  def get_invoice_items_for_invoice(id)
+    sales_engine.find_invoice_items_for_invoice(id)
+  end
+
   def invoice_repository_merchant(id)
     @sales_engine.find_merchants_by_invoice_id(id)
   end
 
+  def invoice_repository_items(id)
+    @sales_engine.find_items_by_invoice(id)
+  end
+
+  def invoice_transactions(invoice_id)
+    sales_engine.find_transactions_by_invoice_id(invoice_id)
+  end
+
+  def customer_invoices(customer_id)
+    sales_engine.find_customer_invoice(customer_id)
+  end
+
 
   def find_by_id(id)
-    #returns nil or instance of invoice
     all.find do |invoice|
       if invoice.id == id.to_s
         return invoice
       end
+      nil
     end
   end
 
   def find_all_by_customer_id(customer_id)
-    #returns [] or matches to customer_id
     all_customers = []
     all.find_all do |invoice|
       if invoice.customer_id == customer_id.to_s

@@ -2,7 +2,7 @@ require 'bigdecimal'
 class Item
 
   attr_reader :id, :name, :description, :unit_price, :created_at, :updated_at,
-              :merchant_id
+              :merchant_id, :item_repository
 
   def initialize(params, item_repository = nil)
     @id = params[:id]
@@ -17,6 +17,10 @@ class Item
 
   def unit_price_to_dollars
     unit_price / 100
+  end
+
+  def merchant
+    item_repository.item_repository_items(self.merchant_id)
   end
 
 end
