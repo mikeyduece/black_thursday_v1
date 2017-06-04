@@ -13,7 +13,7 @@ class Customer
   end
 
   def merchants
-    customer_repo.find_customers_merchants(customer_id)
+    customer_repo.find_customers_merchants(self.id)
   end
 
 end

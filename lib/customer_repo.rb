@@ -17,8 +17,8 @@ class CustomerRepo
     @all_customers
   end
 
-  def find_customers_merchants(customer_id)
-    
+  def find_customers_merchants(id)
+    sales_engine.find_merchants_of_customers(id)
   end
 
   def all
