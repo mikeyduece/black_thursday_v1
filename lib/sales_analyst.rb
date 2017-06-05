@@ -37,23 +37,23 @@ class SalesAnalyst
     strong_offerers
   end
 
-  def average_item_price_per_merchant(id)
+  def average_item_price_for_merchant(id)
     merchant_prices = []
       @se.items.find_all_by_merchant_id(id).each do |x|
         merchant_prices << x.unit_price
       end
    price_avg = (merchant_prices.reduce(:+)) / merchant_prices.length
-   price_avg
+   price_avg.round(2)
   end
 
-  def average_price_per_merchant
-    prices_avgs = merch_id_array.map { |id| average_item_price_per_merchant(id)}
+  def average_average_price_per_merchant
+    prices_avgs = merch_id_array.map { |id| average_item_price_for_merchant(id)}
     avg_ppm = prices_avgs.reduce(:+) / prices_avgs.length
-    avg_ppm
+    avg_ppm.round(2)
   end
 
   def golden_items
-    prices_avgs = merch_id_array.map { |id| average_item_price_per_merchant(id)}
+    prices_avgs = merch_id_array.map { |id| average_item_price_for_merchant(id)}
     price_bar = standard_deviation(prices_avgs) * 2
     golden_items = []
     @se.items.all.each do |item|
