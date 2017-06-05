@@ -53,14 +53,11 @@ class SalesAnalyst
   end
 
   def golden_items
-    prices_avgs = merch_id_array.map { |id| average_item_price_for_merchant(id)}
+    prices_avgs = se.items.all.map {|item| item.unit_price}#merch_id_array.map { |id| average_item_price_for_merchant(id)}
     price_bar = standard_deviation(prices_avgs) * 2
-    golden_items = []
-    @se.items.all.each do |item|
-      if item.unit_price > price_bar
-        golden_items << item
-      else
-      end
+    golden_items = @se.items.all.find_all do |item|
+      item.unit_price.to_i > price_bar
+      # require "pry"; binding.pry
     end
     golden_items
   end
