@@ -42,10 +42,10 @@ class Invoice
     total = invoice_items.map do |invoice_item|
       invoice_item.unit_price * invoice_item.quantity
     end.reduce(:+)
-    return total.round(2) if total && paid_in_full?
+    return total.round(2) if total && is_paid_in_full?
   end
 
-  def paid_in_full?
-    
+  def is_paid_in_full?
+
   end
 end
