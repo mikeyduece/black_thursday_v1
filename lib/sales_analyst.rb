@@ -103,7 +103,3 @@ class SalesAnalyst
     end
   end
 end
-
-
-
-#put these in stats module

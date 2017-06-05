@@ -16,7 +16,7 @@ module Stats
     Math.sqrt(average(variance)).round(2)
   end
 
-  def invoice_day #take out time parse bs its in invoice
+  def invoice_day
     @se.invoices.all.map {|invoice| Date::DAYNAMES[(invoice.created_at).wday]}
   end
 
