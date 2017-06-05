@@ -48,7 +48,6 @@ class MerchantRepository
   end
 
   def find_by_name(name)
-    require "pry"; binding.pry
     all.find do |merchant|
       if merchant.name.downcase == name.downcase
         return merchant

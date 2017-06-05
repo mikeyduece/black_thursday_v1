@@ -34,7 +34,7 @@ class ItemRepository
 
   def find_by_id(id)
     all.find do |item|
-      if item.id == id.to_s
+      if item.id == id
         return item
       end
       nil
@@ -64,27 +64,17 @@ class ItemRepository
   end
 
   def find_all_by_price(price)
-    prices = []
-    all.find do |item|
-      # require "pry"; binding.pry
-      if item.unit_price == price
-        # require "pry"; binding.pry
-        prices << item
-        return item
-      end
-      nil
+    prices = all.find_all do |item|
+      item.unit_price == price
     end
     return [] if prices.empty?
     return prices
-
   end
 
   def find_all_by_price_in_range(range)
     price_range = []
-      all.find_all do |item|
-      if range.include?(item.unit_price)
-        price_range << item
-      end
+      price_range = all.find_all do |item|
+        range.include?(item.unit_price)
     end
     return [] if price_range.empty?
     return price_range
