@@ -49,7 +49,8 @@ class InvoiceRepository
 
   def find_by_id(id)
     all.find do |invoice|
-      if invoice.id == id.to_s
+      if invoice.id == id
+        # require "pry"; binding.pry
         return invoice
       end
       nil
