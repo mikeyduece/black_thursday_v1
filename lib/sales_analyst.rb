@@ -5,33 +5,22 @@ require_relative '../lib/merchant_repository'
 require_relative 'stats'
 
 class SalesAnalyst
-  attr_reader :se,
-              :item_repository,
-              :merchant_repository
+  attr_reader :se
 
   include Stats
 
-  def initialize #refactor to only use se
-    # @se =   se = SalesEngine.from_csv({:items     => "./data/items.csv",
-    #                              :merchants => "./data/merchants.csv",
-    #                              :invoices => "./data/invoices.csv"})
-    @item_repository = ItemRepository.new("./data/items.csv")
-    @merchant_repository = MerchantRepository.new("./data/merchants.csv")
-  end
-
-# initialize needs to be simplified  ^^
-
-  def item_repository
-    @item_repository
-  end
-
-  def merchant_repository
-    @merchant_repository
+  def initialize
+    @se = SalesEngine.from_csv({ :items   => "./data/items.csv",
+                                :merchants => "./data/merchants.csv",
+                                :invoices => "./data/invoices.csv",
+                                :invoice_items => "./data/invoice_items.csv",
+                                :transactions => "./data/transactions.csv",
+                                :customers => "./data/customers.csv"})
   end
 
   def average_items_per_merchant #REFACTOR FIRST
-    total_items = @item_repository.all
-    total_merchants = @merchant_repository.all
+    total_items = @se.items.all
+    total_merchants = @se.merchants.all
     average_items = total_items.count.to_f / total_merchants.count.to_f
     average_items.round(2)
   end
@@ -55,7 +44,7 @@ class SalesAnalyst
 
   def average_item_price_per_merchant(id)
     merchant_prices = []
-      @item_repository.find_all_by_merchant_id(id).each do |x|
+      @se.items.find_all_by_merchant_id(id).each do |x|
         merchant_prices << x.unit_price
       end
    price_avg = (merchant_prices.reduce(:+)) / merchant_prices.length
@@ -72,7 +61,7 @@ class SalesAnalyst
     prices_avgs = merch_id_array.map { |id| average_item_price_per_merchant(id)}
     price_bar = standard_deviation(prices_avgs) * 2
     golden_items = []
-    @item_repository.all.each do |item|
+    @se.items.all.each do |item|
       if item.unit_price > price_bar
         golden_items << item
       else
@@ -81,22 +70,20 @@ class SalesAnalyst
     golden_items
   end
 
-  # **** The following functionality need to be added to SE as per spec ****
-
-
+  
+#private-ish
   def num_items_per_merchant
     merch_ids = merch_id_array
       arr_n_items_by_merch =  []
       merch_ids.each do |id|
-      arr_n_items_by_merch << @item_repository.find_all_by_merchant_id(id).length
+      arr_n_items_by_merch << @se.items.find_all_by_merchant_id(id).length
     end
     arr_n_items_by_merch
   end
 
-
   def merch_with_num_of_items_hash
     merch_name_array = []
-    @merchant_repository.all.each do |merch|
+    @se.merchants.all.each do |merch|
       merch_name_array << merch.name
     end
     nested_arr = merch_name_array.zip(num_items_per_merchant)
@@ -105,7 +92,7 @@ class SalesAnalyst
 
   def merch_id_array
     merch_id_array = []
-    @merchant_repository.all.each do |merch|
+    @se.merchants.all.each do |merch|
       merch_id_array << merch.id
     end
     merch_id_array
