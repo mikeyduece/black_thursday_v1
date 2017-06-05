@@ -93,18 +93,7 @@ class SalesAnalyst
   end
 
   def top_days_by_invoice_count #break out to stats module
-          total_invoices_by_day = {}
-          total_invoices_by_day =  invoice_day.reduce({}) do |val, day|
-            val[day] = 0 if val[day].nil?
-            val[day] += 1
-            val
-        end
-        total_invoices_by_day
-        invoices_by_day = total_invoices_by_day.values
-        bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
-        top_days = []
-        total_invoices_by_day.each { |key, value| top_days << key if value > bar}
-        top_days
+        top_days_via_invoices
   end
 
   def invoice_status(status)
@@ -118,34 +107,8 @@ class SalesAnalyst
       "thats not an option for invoice status"
     end
   end
-
+end
 
 
 
 #put these in stats module
-  def num_items_per_merchant
-    merch_ids = merch_id_array
-      arr_n_items_by_merch =  []
-      merch_ids.each do |id|
-      arr_n_items_by_merch << @se.items.find_all_by_merchant_id(id).length
-    end
-    arr_n_items_by_merch
-  end
-
-  def merch_with_num_of_items_hash
-    merch_name_array = []
-    @se.merchants.all.each do |merch|
-      merch_name_array << merch.name
-    end
-    nested_arr = merch_name_array.zip(num_items_per_merchant)
-    hash = Hash[nested_arr]
-  end
-
-  def merch_id_array
-    merch_id_array = []
-    @se.merchants.all.each do |merch|
-      merch_id_array << merch.id
-    end
-    merch_id_array
-  end
-end
