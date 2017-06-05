@@ -21,17 +21,17 @@ module Stats
   end
 
   def top_days_via_invoices
-    total_invoices_by_day = {}
     total_invoices_by_day =  invoice_day.reduce({}) do |val, day|
       val[day] = 0 if val[day].nil?
       val[day] += 1
       val
     end
     total_invoices_by_day
+    # require "pry"; binding.pry
     invoices_by_day = total_invoices_by_day.values
     bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
     top_days = []
-    total_invoices_by_day.each { |key, value| top_days << key if value > bar}
+    total_invoices_by_day.each { |key, value| top_days << key if value > bar.round(0)}
     top_days
   end
 

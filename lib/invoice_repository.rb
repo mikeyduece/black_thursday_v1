@@ -66,24 +66,16 @@ class InvoiceRepository
   end
 
   def find_all_by_status(status_input)
-    #returns [] or matches to status
-    all_statuses = []
-    all.find_all do |invoice|
-      if invoice.status == status_input
-        all_statuses << invoice
-      end
+    all_statuses = all.find_all do |invoice|
+      invoice.status == status_input
     end
     return [] if all_statuses.empty?
     return all_statuses
   end
 
   def find_all_by_merchant_id(merch_id)
-    #returns [] ro matches to merchant_id
-    all_merchant_ids = []
-    all.find_all do |invoice|
-      if invoice.merchant_id == merch_id.to_s
-        all_merchant_ids << invoice
-      end
+    all_merchant_ids = all.find_all do |invoice|
+      invoice.merchant_id == merch_id
     end
     return [] if all_merchant_ids.empty?
     return all_merchant_ids
