@@ -1,12 +1,9 @@
-
 require 'time'
 
 module Stats
-
   def average(info)
     (info.reduce(:+)/info.count.to_f).round(2)
   end
-
 
   def variance(info)
     current_av = average(info)
@@ -19,7 +16,7 @@ module Stats
     Math.sqrt(average(variance)).round(2)
   end
 
-  def invoice_day
+  def invoice_day #take out time parse bs its in invoice
     @se.invoices.all.map {|invoice| Date::DAYNAMES[Time.parse(invoice.created_at).wday]}
   end
 
@@ -88,7 +85,4 @@ module Stats
     end
     merch_id_array
   end
-
-
-  
 end
