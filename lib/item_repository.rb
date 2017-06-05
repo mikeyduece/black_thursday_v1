@@ -52,7 +52,7 @@ class ItemRepository
 
   def find_all_with_description(description)
     all_description = []
-    all.find do |item|
+    all.find_all do |item|
       while item.description.downcase.include?(description.downcase)
         all_description << item
       return all_description
@@ -81,14 +81,10 @@ class ItemRepository
   end
 
   def find_all_by_merchant_id(merch_id)
-    merchant_id_range = []
-    all.find_all do |item|
-      # require "pry"; binding.pry
-      if item.merchant_id == merch_id.to_s
-        merchant_id_range << item
-      end
+    merchant_id_range = all.find_all do |item|
+      item.merchant_id == merch_id
     end
-    return [] if merchant_id_range.nil?
+    return [] if merchant_id_range.empty?
     return merchant_id_range
   end
 end
