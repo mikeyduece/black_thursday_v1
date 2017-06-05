@@ -12,9 +12,9 @@ class Invoice
 
   def initialize(params, invoice_repository = nil)
     @id                 = params[:id].to_i
-    @customer_id        = params[:customer_id]
-    @merchant_id        = params[:merchant_id]
-    @status             = params[:status]
+    @customer_id        = params[:customer_id].to_i
+    @merchant_id        = params[:merchant_id].to_i
+    @status             = params[:status].to_sym
     @created_at         = Time.parse(params[:created_at].to_s)
     @updated_at         = Time.parse(params[:updated_at].to_s)
     @invoice_repository = invoice_repository

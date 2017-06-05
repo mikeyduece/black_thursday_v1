@@ -58,11 +58,8 @@ class InvoiceRepository
   end
 
   def find_all_by_customer_id(customer_id)
-    all_customers = []
-    all.find_all do |invoice|
-      if invoice.customer_id == customer_id.to_s
-        all_customers << invoice
-      end
+    all_customers = all.find_all do |invoice|
+      invoice.customer_id == customer_id
     end
     return [] if all_customers.empty?
     return all_customers
