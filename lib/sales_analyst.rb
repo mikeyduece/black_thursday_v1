@@ -9,13 +9,8 @@ class SalesAnalyst
 
   include Stats
 
-  def initialize #do we need to add an argument?
-    @se = SalesEngine.from_csv({ :items   => "./data/items.csv",
-                                :merchants => "./data/merchants.csv",
-                                :invoices => "./data/invoices.csv",
-                                :invoice_items => "./data/invoice_items.csv",
-                                :transactions => "./data/transactions.csv",
-                                :customers => "./data/customers.csv"})
+  def initialize(se=nil) #do we need to add an argument?
+    @se = se
   end
 
   def average_items_per_merchant #REFACTOR FIRST
@@ -108,7 +103,3 @@ class SalesAnalyst
     end
   end
 end
-
-
-
-#put these in stats module

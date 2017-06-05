@@ -10,27 +10,38 @@ require_relative '../lib/invoice_repository'
 require_relative '../lib/transaction_repo'
 require 'csv'
 
+#make pass with new argument structure
 
 class SalesAnalystTest < Minitest::Test
   include Stats
+  attr_reader :se
+
+  def setup
+    @se = SalesEngine.from_csv({ :items   => "./data/items.csv",
+                                :merchants => "./data/merchants.csv",
+                                :invoices => "./data/invoices.csv",
+                                :invoice_items => "./data/invoice_items.csv",
+                                :transactions => "./data/transactions.csv",
+                                :customers => "./data/customers.csv"})
+  end
 
   def test_averages_items_per_merchant
     total_items = ItemRepository.new("./data/items.csv").all
     total_merchants = MerchantRepository.new("./data/merchants.csv").all
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     result = total_items.count.to_f / total_merchants.count.to_f
     assert_equal instance.average_items_per_merchant, result.round(2)
   end
 
   def test_average_items_per_mechant_standard_deviation
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     info = instance.num_items_per_merchant
     result = standard_deviation(info).round(2)
     assert_equal instance.average_items_per_merchant_standard_deviation, result
   end
 
   def test_produces_array_of_highest_item_count
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     strong_offerers = []
     bar = instance.average_items_per_merchant + instance.average_items_per_merchant_standard_deviation
     instance.merch_with_num_of_items_hash.each do |key, value|
@@ -45,7 +56,7 @@ class SalesAnalystTest < Minitest::Test
 
   def test_average_item_per_specific_merchant
     item_repository = ItemRepository.new("./data/items.csv")
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     merchant_prices = []
     item_repository.find_all_by_merchant_id(12334112).each do |x|
       merchant_prices << x.unit_price
@@ -56,7 +67,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_item_per_all_merchants
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     prices_avgs = instance.merch_id_array.map { |id| instance.average_item_price_per_merchant(id)}
     avg_ppm = prices_avgs.reduce(:+) / prices_avgs.length
     result = avg_ppm
@@ -65,7 +76,7 @@ class SalesAnalystTest < Minitest::Test
 
   def test_returns_golden_items
     item_repository = ItemRepository.new("./data/items.csv")
-    instance = SalesAnalyst.new
+    instance = SalesAnalyst.new(se)
     prices_avgs = instance.merch_id_array.map { |id| instance.average_item_price_per_merchant(id)}
     price_bar = standard_deviation(prices_avgs) * 2
     gold_stuff = []
@@ -82,21 +93,21 @@ class SalesAnalystTest < Minitest::Test
 #make the tests by calling from specific repositories, rather than SE
 
   def test_average_invoices_per_merchant
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     result = average(info)
     assert_equal sa.average_invoices_per_merchant, result
   end
 
   def test_average_invoices_per_merchant_standard_deviation
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     result = standard_deviation(info)
     assert_equal sa.average_invoices_per_merchant_standard_deviation, result
   end
 
   def test_top_merchants_by_invoice_count
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     cutoff = average(info) + (standard_deviation(info) * 2)
     result = sa.se.merchants.all.find_all {|merchant| merchant.invoices.length > cutoff}
@@ -104,7 +115,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_bottom_merchants_by_invoice_count
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     cutoff = average(info) - (standard_deviation(info) * 2)
     result = sa.se.merchants.all.find_all {|merchant| merchant.invoices.length < cutoff}
@@ -112,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_top_days_by_invoice_count
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     total_invoices_by_day = {}
     total_invoices_by_day =  sa.invoice_day.reduce({}) do |val, day|
       val[day] = 0 if val[day].nil?
@@ -129,25 +140,32 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_invoice_status_pending
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     result = sa.pending_invoices
     assert_equal sa.invoice_status(:pending), result
   end
 
   def test_invoice_status_shipped
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     result = sa.shipped_invoices
     assert_equal sa.invoice_status(:shipped), result
   end
 
   def test_invoice_status_returned
-    sa = SalesAnalyst.new
+    sa = SalesAnalyst.new(se)
     result = sa.returned_invoices
     assert_equal sa.invoice_status(:returned), result
   end
 end
 
-
-
-# sa = SalesAnalyst.new
+#
+#
+# se = SalesEngine.from_csv({ :items   => "./data/items.csv",
+#                             :merchants => "./data/merchants.csv",
+#                             :invoices => "./data/invoices.csv",
+#                             :invoice_items => "./data/invoice_items.csv",
+#                             :transactions => "./data/transactions.csv",
+#                             :customers => "./data/customers.csv"})
+#
+# sa = SalesAnalyst.new(se)
 # require 'pry';binding.pry
