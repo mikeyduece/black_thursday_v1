@@ -12,9 +12,9 @@ class SalesAnalyst
   include Stats
 
   def initialize #refactor to only use se
-    @se =   se = SalesEngine.from_csv({:items     => "./data/items.csv",
-                                 :merchants => "./data/merchants.csv",
-                                 :invoices => "./data/invoices.csv"})
+    # @se =   se = SalesEngine.from_csv({:items     => "./data/items.csv",
+    #                              :merchants => "./data/merchants.csv",
+    #                              :invoices => "./data/invoices.csv"})
     @item_repository = ItemRepository.new("./data/items.csv")
     @merchant_repository = MerchantRepository.new("./data/merchants.csv")
   end
