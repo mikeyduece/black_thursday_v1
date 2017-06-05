@@ -8,8 +8,8 @@ class Item
     @id = params[:id].to_i
     @name = params[:name]
     @description = params[:description]
-    @unit_price = BigDecimal.new(params[:unit_price],4)
-    @merchant_id = params[:merchant_id]
+    @unit_price = BigDecimal.new(params[:unit_price].insert(-3,"."))
+    @merchant_id = params[:merchant_id].to_i
     @created_at = Time.parse(params[:created_at].to_s)
     @updated_at = Time.parse(params[:updated_at].to_s)
     @item_repository = item_repository

@@ -25,4 +25,3 @@ class Merchant
   end
 
 end
-
