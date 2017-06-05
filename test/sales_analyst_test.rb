@@ -5,6 +5,9 @@ require_relative '../lib/sales_engine'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/merchant'
 require_relative '../lib/stats'
+require_relative '../lib/invoice_item_repo'
+require_relative '../lib/invoice_repository'
+require_relative '../lib/transaction_repo'
 require 'csv'
 
 
@@ -75,7 +78,15 @@ class SalesAnalystTest < Minitest::Test
     result = gold_stuff.count
     assert_equal instance.golden_items.count, result
   end
+
+#make the tests by calling from specific repositories, rather than SE
+
+  def test_average_invoiced_per_merchant
+    skip
+  end
 end
 
 
-# require 'pry';binding.pry
+
+sa = SalesAnalyst.new
+require 'pry';binding.pry

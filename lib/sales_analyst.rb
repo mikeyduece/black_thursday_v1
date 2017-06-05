@@ -9,7 +9,7 @@ class SalesAnalyst
 
   include Stats
 
-  def initialize
+  def initialize #do we need to add an argument?
     @se = SalesEngine.from_csv({ :items   => "./data/items.csv",
                                 :merchants => "./data/merchants.csv",
                                 :invoices => "./data/invoices.csv",
@@ -70,8 +70,48 @@ class SalesAnalyst
     golden_items
   end
 
-  
-#private-ish
+  def average_invoices_per_merchant
+    info = @se.merchants.all.map {|merchant| merchant.invoices.count}
+    average(info)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    info = @se.merchants.all.map {|merchant| merchant.invoices.count}
+    standard_deviation(info)
+  end
+
+  def top_merchants_by_invoice_count
+      info = @se.merchants.all.map {|merchant| merchant.invoices.count}
+      cutoff = average(info) + (standard_deviation(info) * 2)
+      @se.merchants.all.find_all {|merchant| merchant.invoices.length > cutoff}
+  end
+
+  def bottom_merchants_by_invoice_count
+      info = @se.merchants.all.map {|merchant| merchant.invoices.count}
+      cutoff = average(info) - (standard_deviation(info) * 2)
+      @se.merchants.all.find_all {|merchant| merchant.invoices.length < cutoff}
+  end
+
+  def top_days_by_invoice_count
+    #which DAYS OF THE WEEK are invoices created at more than 1 std deviation
+    #above the mean
+        #ret array of days of the week
+
+      invoice_day.reduce({}) do |val, day|
+            val[day] = 0 if val[day].nil?
+            val[day] += 1
+            val
+        end
+  end
+
+  def invoice_status(status)
+    #for :pending, :shipped, :returned
+  end
+
+
+
+
+#private-ish, could be a module? (put in stats_helper (stats))
   def num_items_per_merchant
     merch_ids = merch_id_array
       arr_n_items_by_merch =  []
