@@ -1,4 +1,4 @@
-#require time?
+require 'time'
 
 class Invoice
 

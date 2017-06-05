@@ -17,7 +17,7 @@ module Stats
   end
 
   def invoice_day #take out time parse bs its in invoice
-    @se.invoices.all.map {|invoice| Date::DAYNAMES[Time.parse(invoice.created_at).wday]}
+    @se.invoices.all.map {|invoice| Date::DAYNAMES[(invoice.created_at).wday]}
   end
 
   def top_days_via_invoices
