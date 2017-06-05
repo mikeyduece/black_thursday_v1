@@ -43,6 +43,7 @@ class Invoice
       invoice_item.unit_price * invoice_item.quantity
       # require "pry"; binding.pry
     end.reduce(:+)
+
     return total.round(2) if total && self.is_paid_in_full?
 
   end
@@ -53,5 +54,8 @@ class Invoice
 
   def is_paid_in_full?
     transaction_result.any? {|transaction| transaction.result == "success"}
+  end
+
+  def is_paid_in_full?
   end
 end

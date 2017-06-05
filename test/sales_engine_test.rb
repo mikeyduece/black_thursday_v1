@@ -93,8 +93,8 @@ class SalesEngineTest < Minitest::Test
     invoice = se.invoices.find_by_id(11)
     assert_instance_of Array, invoice.items
     assert_instance_of Item, invoice.items[0]
-    #need to check if filled with item obj
   end
+  
   def test_invoice_can_talk_to_transactions
     invoice = se.invoices.find_by_id(46)
     assert_instance_of Array, invoice.transactions
