@@ -38,4 +38,10 @@ class InvoiceTest < Minitest::Test
   def test_it_can_see_parent
     assert_equal 8, i.merchant
   end
+
+  # def test_it_can_tell_paying_customers
+  #   invoice = se.invoices.find_by_id(15)
+  #   assert_instance_of BigDecimal, invoice.total
+  # end
+
 end

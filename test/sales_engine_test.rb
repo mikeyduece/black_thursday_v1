@@ -90,13 +90,11 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_invoice_can_talk_to_items
-
     invoice = se.invoices.find_by_id(11)
     assert_instance_of Array, invoice.items
-    assert_instance_of InvoiceItem, invoice.items[0]
-
-    #need to check if filled with item obj
+    assert_instance_of Item, invoice.items[0]
   end
+  
   def test_invoice_can_talk_to_transactions
     invoice = se.invoices.find_by_id(46)
     assert_instance_of Array, invoice.transactions
@@ -126,8 +124,25 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_invoice_can_talke_to_invoice_item
-    invoice = se.invoices.find_by_id(15)
+    invoice = se.invoices.find_by_id(14)
     assert_instance_of Array, invoice.invoice_items
     assert_instance_of InvoiceItem, invoice.invoice_items[0]
+  end
+
+  def test_it_can_see_if_fully_paid
+    invoice = se.invoices.find_by_id(46)
+    assert invoice.is_paid_in_full?
+  end
+
+  def test_it_can_see_who_has_not_paid
+    invoice = se.invoices.find_by_id(1752)
+    refute invoice.is_paid_in_full?
+  end
+
+  def test_it_can_count_totals
+    invoice = se.invoices.find_by_id(14)
+
+    assert_instance_of BigDecimal, invoice.total
+    assert_equal BigDecimal.new('0.22767E5'), invoice.total 
   end
 end

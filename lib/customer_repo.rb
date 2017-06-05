@@ -10,6 +10,10 @@ class CustomerRepo
     open_all_customers(filename)
   end
 
+  def inspect
+    "#<#{self.class} #{@customers.size} rows>"
+  end
+
   def open_all_customers(filename)
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
       @all_customers << Customer.new(row,self)

@@ -7,8 +7,8 @@ class Customer
     @id            = params[:id]
     @first_name    = params[:first_name]
     @last_name     = params[:last_name]
-    @created_at    = params[:created_at]
-    @updated_at    = params[:created_at]
+    @created_at    = Time.parse(params[:created_at].to_s)
+    @updated_at    = Time.parse(params[:updated_at].to_s)
     @customer_repo = customer_repo
   end
 
