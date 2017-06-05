@@ -12,6 +12,7 @@ class InvoiceItemRepo
   end
 
   def open_all_items(filename)
+    @all_invoice_items = []
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
       @all_invoice_items << InvoiceItem.new(row,self)
     end

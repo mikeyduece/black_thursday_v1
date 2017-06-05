@@ -74,7 +74,9 @@ class SalesEngine
   end
 
   def all_invoices
+
     invoices.all
+
   end
 
 end

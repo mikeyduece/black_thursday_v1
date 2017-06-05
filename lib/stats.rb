@@ -1,9 +1,12 @@
+
 require 'time'
 
 module Stats
+
   def average(info)
     (info.reduce(:+)/info.count.to_f).round(2)
   end
+
 
   def variance(info)
     current_av = average(info)
@@ -85,4 +88,7 @@ module Stats
     end
     merch_id_array
   end
+
+
+  
 end

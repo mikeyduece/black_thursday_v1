@@ -23,4 +23,6 @@ class Merchant
   def customers
     merchant_repository.find_merchants_customers(id)
   end
-end 
+
+end
+
