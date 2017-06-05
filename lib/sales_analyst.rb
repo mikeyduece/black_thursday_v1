@@ -25,7 +25,7 @@ class SalesAnalyst
     standard_deviation(info).round(2)
   end
 
-  def merchants_with_highest_item_count
+  def merchants_with_high_item_count
     strong_offerers = []
     bar = average_items_per_merchant+average_items_per_merchant_standard_deviation
     merch_with_num_of_items_hash.each do |key, value|

@@ -72,7 +72,7 @@ module Stats
   def merch_with_num_of_items_hash
     merch_name_array = []
     @se.merchants.all.each do |merch|
-      merch_name_array << merch.name
+      merch_name_array << merch#.name
     end
     nested_arr = merch_name_array.zip(num_items_per_merchant)
     hash = Hash[nested_arr]
