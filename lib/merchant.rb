@@ -8,7 +8,7 @@ class Merchant
 
   def initialize(params, merchant_repository=nil)
     @name = params[:name]
-    @id = params[:id]
+    @id = params[:id].to_i
     @merchant_repository = merchant_repository
   end
 

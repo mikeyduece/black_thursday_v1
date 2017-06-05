@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../lib/merchant'
+require_relative 'merchant'
 class MerchantRepository
 
   attr_reader :all,
@@ -9,6 +9,10 @@ class MerchantRepository
     @sales_engine = sales_engine
     @all_merchants = []
     open_all_items(filename)
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
   def open_all_items(filename)
@@ -36,7 +40,7 @@ class MerchantRepository
 
   def find_by_id(id)
     all.find do |merchant|
-      if merchant.id == id.to_s
+      if merchant.id == id
         return merchant
       end
       nil
@@ -44,6 +48,7 @@ class MerchantRepository
   end
 
   def find_by_name(name)
+    require "pry"; binding.pry
     all.find do |merchant|
       if merchant.name.downcase == name.downcase
         return merchant
@@ -53,13 +58,8 @@ class MerchantRepository
   end
 
   def find_all_by_name(name)
-    all_merchants = []
-    all.find do |merchant|
-      while merchant.name.downcase.include?(name.downcase)
-        all_merchants << merchant
-      return all_merchants
-      end
-      nil
+    all_merchants = all.find_all do |merchant|
+      merchant.name.downcase.include?(name.downcase)
     end
     return [] if all_merchants.empty?
     return all_merchants

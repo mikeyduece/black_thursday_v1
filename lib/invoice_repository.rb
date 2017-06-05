@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../lib/invoice'
+require_relative 'invoice'
 
 class InvoiceRepository
 
@@ -8,6 +8,10 @@ class InvoiceRepository
   def initialize(filename, sales_engine = nil)
     @all =open_all_items(filename)
     @sales_engine = sales_engine
+  end
+
+  def inspect
+    "#<#{self.class} #{@invoices.size} rows>"
   end
 
   def open_all_items(filename)

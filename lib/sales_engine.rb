@@ -1,9 +1,9 @@
-require_relative '../lib/merchant_repository'
-require_relative '../lib/item_repository'
-require_relative '../lib/invoice_repository'
-require_relative '../lib/invoice_item_repo'
-require_relative '../lib/transaction_repo'
-require_relative '../lib/customer_repo'
+require_relative 'merchant_repository'
+require_relative 'item_repository'
+require_relative 'invoice_repository'
+require_relative 'invoice_item_repo'
+require_relative 'transaction_repo'
+require_relative 'customer_repo'
 
 class SalesEngine
 
@@ -24,7 +24,6 @@ class SalesEngine
   end
 
   def find_invoice_items_for_invoice(invoice_id)
-    # require "pry"; binding.pry
     invoice_items.find_all_by_invoice_id(invoice_id)
   end
 
@@ -75,7 +74,7 @@ class SalesEngine
   end
 
   def all_invoices
-    invoice.all
+    invoices.all
   end
 
 end

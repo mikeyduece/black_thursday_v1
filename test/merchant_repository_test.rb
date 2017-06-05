@@ -36,4 +36,13 @@ class MerchantRepositoryTest < Minitest::Test
     assert_nil mr.find_by_name("Princessfrank")
   end
 
+  def def_test_it_can_find_all_names_by_frag
+    mr = MerchantRepository.new("./data/test_merchants.csv")
+    assert_instance_of Array, mr.find_all_by_name("style")
+
+    assert_equal 3, mr.find_all_by_name("style").count
+  end
+
+
+
 end

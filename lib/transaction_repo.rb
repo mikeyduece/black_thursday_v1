@@ -11,6 +11,10 @@ class TransactionRepo
     open_all_items(filename)
   end
 
+  def inspect
+    "#<#{self.class} #{@transactions.size} rows>"
+  end
+
   def open_all_items(filename)
     CSV.foreach filename, headers: true, header_converters: :symbol do |row|
       @all_transactions << Transaction.new(row,self)
