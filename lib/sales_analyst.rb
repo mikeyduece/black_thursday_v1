@@ -108,8 +108,15 @@ class SalesAnalyst
   end
 
   def invoice_status(status)
-    #for :pending, :shipped, :returned
-
+    if status == :pending
+      pending_invoices
+    elsif status == :shipped
+      shipped_invoices
+    elsif status == :returned
+      returned_invoices
+    else
+      "thats not an option for invoice status"
+    end
   end
 
 

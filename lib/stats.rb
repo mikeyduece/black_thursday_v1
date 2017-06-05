@@ -18,26 +18,37 @@ module Stats
   end
 
 
-
-
-
   def invoice_day
     @se.invoices.all.map {|invoice| Date::DAYNAMES[Time.parse(invoice.created_at).wday]}
   end
 
-  def compare_invoice_days
-    #sort_number_of_unique_days_into_groups
+  def pending_invoices
+    total =  @se.invoices.all.length
+    pending = 0
+    @se.invoices.all.each { |invoice| pending += 1 if invoice.status == "pending"}
+    pending_percent = (pending.to_f / total.to_f) * 100
+    pending_percent.round(2)
+  end
+
+  def shipped_invoices
+    total =  @se.invoices.all.length
+    shipped = 0
+    @se.invoices.all.each { |invoice| shipped += 1 if invoice.status == "shipped"}
+    shipped_percent =  (shipped.to_f / total.to_f) * 100
+    shipped_percent.round(2)
+  end
+
+  def returned_invoices
+    total =  @se.invoices.all.length
+    returned = 0
+    @se.invoices.all.each { |invoice| returned += 1 if invoice.status == "returned"}
+    returned_percent =  (returned.to_f / total.to_f) * 100
+    returned_percent.round(2)
   end
 
 
-#these are unneccessary
-  def average_invoices_per_merchant_method
-    average(@se.merchants.all.map {|merchant| merchant.invoices.count})
-  end
 
-  def average_invoices_per_merchant_standard_deviation(info)
-    standard_deviation(merchants.map {|merchant| merchants.invoices.count})
-  end
+
 
 end
 
