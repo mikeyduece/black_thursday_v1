@@ -5,7 +5,6 @@ module Stats
     (info.reduce(:+)/info.count.to_f).round(2)
   end
 
-
   def variance(info)
     current_av = average(info)
     info.map {|num| (num-current_av)**2}

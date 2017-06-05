@@ -92,7 +92,7 @@ class SalesAnalyst
       @se.merchants.all.find_all {|merchant| merchant.invoices.length < cutoff}
   end
 
-  def top_days_by_invoice_count
+  def top_days_by_invoice_count #break out to stats module
           total_invoices_by_day = {}
           total_invoices_by_day =  invoice_day.reduce({}) do |val, day|
             val[day] = 0 if val[day].nil?
@@ -122,7 +122,7 @@ class SalesAnalyst
 
 
 
-#private-ish, could be a module? (put in stats_helper (stats))
+#put these in stats module
   def num_items_per_merchant
     merch_ids = merch_id_array
       arr_n_items_by_merch =  []

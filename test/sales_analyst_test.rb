@@ -81,12 +81,73 @@ class SalesAnalystTest < Minitest::Test
 
 #make the tests by calling from specific repositories, rather than SE
 
-  def test_average_invoiced_per_merchant
-    skip
+  def test_average_invoices_per_merchant
+    sa = SalesAnalyst.new
+    info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
+    result = average(info)
+    assert_equal sa.average_invoices_per_merchant, result
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation
+    sa = SalesAnalyst.new
+    info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
+    result = standard_deviation(info)
+    assert_equal sa.average_invoices_per_merchant_standard_deviation, result
+  end
+
+  def test_top_merchants_by_invoice_count
+    sa = SalesAnalyst.new
+    info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
+    cutoff = average(info) + (standard_deviation(info) * 2)
+    result = sa.se.merchants.all.find_all {|merchant| merchant.invoices.length > cutoff}
+    assert_equal sa.top_merchants_by_invoice_count, result
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    sa = SalesAnalyst.new
+    info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
+    cutoff = average(info) - (standard_deviation(info) * 2)
+    result = sa.se.merchants.all.find_all {|merchant| merchant.invoices.length < cutoff}
+    assert_equal sa.bottom_merchants_by_invoice_count, result
+  end
+
+  def test_top_days_by_invoice_count
+    sa = SalesAnalyst.new
+    total_invoices_by_day = {}
+    total_invoices_by_day =  sa.invoice_day.reduce({}) do |val, day|
+      val[day] = 0 if val[day].nil?
+      val[day] += 1
+      val
+  end
+  total_invoices_by_day
+  invoices_by_day = total_invoices_by_day.values
+  bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
+  top_days = []
+  total_invoices_by_day.each { |key, value| top_days << key if value > bar}
+  result = top_days
+    assert_equal sa.top_days_by_invoice_count, result
+  end
+
+  def test_invoice_status_pending
+    sa = SalesAnalyst.new
+    result = sa.pending_invoices
+    assert_equal sa.invoice_status(:pending), result
+  end
+
+  def test_invoice_status_shipped
+    sa = SalesAnalyst.new
+    result = sa.shipped_invoices
+    assert_equal sa.invoice_status(:shipped), result
+  end
+
+  def test_invoice_status_returned
+    sa = SalesAnalyst.new
+    result = sa.returned_invoices
+    assert_equal sa.invoice_status(:returned), result
   end
 end
 
 
 
-sa = SalesAnalyst.new
-require 'pry';binding.pry
+# sa = SalesAnalyst.new
+# require 'pry';binding.pry
