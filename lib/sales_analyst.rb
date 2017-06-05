@@ -93,19 +93,23 @@ class SalesAnalyst
   end
 
   def top_days_by_invoice_count
-    #which DAYS OF THE WEEK are invoices created at more than 1 std deviation
-    #above the mean
-        #ret array of days of the week
-
-      invoice_day.reduce({}) do |val, day|
+          total_invoices_by_day = {}
+          total_invoices_by_day =  invoice_day.reduce({}) do |val, day|
             val[day] = 0 if val[day].nil?
             val[day] += 1
             val
         end
+        total_invoices_by_day
+        invoices_by_day = total_invoices_by_day.values
+        bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
+        top_days = []
+        total_invoices_by_day.each { |key, value| top_days << key if value > bar}
+        top_days
   end
 
   def invoice_status(status)
     #for :pending, :shipped, :returned
+
   end
 
 

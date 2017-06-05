@@ -25,6 +25,9 @@ module Stats
     @se.invoices.all.map {|invoice| Date::DAYNAMES[Time.parse(invoice.created_at).wday]}
   end
 
+  def compare_invoice_days
+    #sort_number_of_unique_days_into_groups
+  end
 
 
 #these are unneccessary
