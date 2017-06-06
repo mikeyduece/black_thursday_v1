@@ -27,11 +27,11 @@ class InvoiceRepository
   end
 
   def invoice_repository_merchant(id)
-    @sales_engine.find_merchants_by_invoice_id(id)
+    sales_engine.find_merchants_by_invoice_id(id)
   end
 
   def invoice_repository_items(id)
-    @sales_engine.find_items_by_invoice(id)
+    sales_engine.find_items_by_invoice(id)
   end
 
   def invoice_transactions(invoice_id)

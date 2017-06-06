@@ -27,21 +27,12 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_can_tell_status
-    assert_equal "pending", i.status
+    assert_equal :pending, i.status
   end
 
   def test_it_can_tell_time
     assert_instance_of Time, i.created_at
     assert_instance_of Time, i.updated_at
   end
-
-  def test_it_can_see_parent
-    assert_equal 8, i.merchant
-  end
-
-  # def test_it_can_tell_paying_customers
-  #   invoice = se.invoices.find_by_id(15)
-  #   assert_instance_of BigDecimal, invoice.total
-  # end
 
 end
