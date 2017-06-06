@@ -53,7 +53,7 @@ class SalesAnalyst
   end
 
   def golden_items
-    prices_avgs = se.items.all.map {|item| item.unit_price}#merch_id_array.map { |id| average_item_price_for_merchant(id)}
+    prices_avgs = se.items.all.map {|item| item.unit_price}
     price_bar = standard_deviation(prices_avgs) * 2
     golden_items = @se.items.all.find_all do |item|
       item.unit_price.to_i > price_bar
@@ -85,7 +85,7 @@ class SalesAnalyst
   end
 
   def top_days_by_invoice_count #break out to stats module
-        top_days_via_invoices
+      top_days_via_invoices
   end
 
   def invoice_status(status)

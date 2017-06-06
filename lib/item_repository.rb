@@ -14,7 +14,7 @@ class ItemRepository
   end
 
   def inspect
-    "#<#{self.class} #{@items.size} rows>"
+    "#<#{self.class} #{@all_items.size} rows>"
   end
 
   def open_all_items(filename)
