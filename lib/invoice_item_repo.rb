@@ -27,9 +27,13 @@ class InvoiceItemRepo
     @all_invoice_items
   end
 
+  def find_item_by_id(id)
+    sales_engine.find_item_by_id(id)
+  end
+
   def find_by_id(id)
     all.find do |invoice_item|
-      if invoice_item.id == id.to_s
+      if invoice_item.id == id
         return invoice_item
       end
       nil
@@ -39,7 +43,7 @@ class InvoiceItemRepo
   def find_all_by_item_id(item_id)
     all_item_ids = []
     all.find_all do |invoice_item|
-      if invoice_item.item_id == item_id.to_s
+      if invoice_item.item_id == item_id
         all_item_ids << invoice_item
       end
     end
@@ -50,7 +54,7 @@ class InvoiceItemRepo
   def find_all_by_invoice_id(invoice_id)
     all_invoice_ids = []
     all.find_all do |invoice_item|
-      if invoice_item.invoice_id == invoice_id.to_s
+      if invoice_item.invoice_id == invoice_id
         all_invoice_ids << invoice_item
       end
     end

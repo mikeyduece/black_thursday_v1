@@ -25,7 +25,7 @@ class Invoice
   end
 
   def items
-    invoice_repository.invoice_repository_items(self.merchant_id)
+    invoice_repository.invoice_repository_items(self.id)
   end
 
   def transactions

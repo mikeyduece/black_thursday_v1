@@ -29,7 +29,7 @@ class SalesEngine
 
   def find_customers(merchant_id)
     customer_array = invoices.find_all_by_merchant_id(merchant_id)
-    customer_array.map {|invoice| invoice.customer}
+    customer_array.map {|invoice| invoice.customer}.uniq 
   end
 
   def find_merchants_of_customers(customer_id)
@@ -42,7 +42,8 @@ class SalesEngine
   end
 
   def find_items_by_invoice(id)
-    items.find_all_by_merchant_id(id)
+    items_arr = invoice_items.find_all_by_invoice_id(id)
+    items_arr.map {|invoice_item| invoice_item.item}
   end
 
   def find_invoices(merch_id)
@@ -63,6 +64,10 @@ class SalesEngine
 
   def find_customer_invoice(customer_id)
     customers.find_by_id(customer_id)
+  end
+
+  def find_item_by_id(id)
+    items.find_by_id(id)
   end
 
   def find_items(id)

@@ -31,7 +31,7 @@ class CustomerRepo
 
   def find_by_id(id)
     all.find do |customer|
-      if customer.id == id.to_s
+      if customer.id == id
         return customer
       end
       nil
@@ -39,22 +39,16 @@ class CustomerRepo
   end
 
   def find_all_by_first_name(fname)
-    first_names = []
-    all.find_all do |customer|
-      if customer.first_name.downcase == fname.downcase.to_s
-        first_names << customer
-      end
+    first_names = all.find_all do |customer|
+      customer.first_name.downcase.include?(fname.downcase.to_s)
     end
     return [] if first_names.empty?
     return first_names
   end
 
   def find_all_by_last_name(lname)
-    last_names =[]
-    all.find_all do |customer|
-      if customer.last_name.downcase == lname.downcase.to_s
-        last_names << customer
-      end
+    last_names =all.find_all do |customer|
+      customer.last_name.downcase.include?(lname.downcase.to_s)
     end
     return [] if last_names.empty?
     return last_names

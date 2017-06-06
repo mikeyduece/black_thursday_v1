@@ -72,9 +72,8 @@ class ItemRepository
   end
 
   def find_all_by_price_in_range(range)
-    price_range = []
-      price_range = all.find_all do |item|
-        range.include?(item.unit_price)
+    price_range = all.find_all do |item|
+      range.include?(item.unit_price)
     end
     return [] if price_range.empty?
     return price_range
