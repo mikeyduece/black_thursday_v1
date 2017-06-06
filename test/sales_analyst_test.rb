@@ -71,7 +71,9 @@ class SalesAnalystTest < Minitest::Test
     prices_avgs = instance.merch_id_array.map { |id| instance.average_item_price_for_merchant(id)}
     avg_ppm = prices_avgs.reduce(:+) / prices_avgs.length
     result = avg_ppm.round(2)
-    assert_equal instance.average_item_price_for_merchant(12334105), result
+    # assert_equal instance.average_item_price_for_merchant(12334105), result
+    assert_equal 350.29, result
+    assert_instance_of BigDecimal, result
   end
 
   def test_returns_golden_items
