@@ -21,24 +21,24 @@ module Stats
   end
 
   def top_days_via_invoices
-    total_invoices_by_day =  invoice_day.reduce({}) do |val, day|
+    total_by_day =  invoice_day.reduce({}) do |val, day|
       val[day] = 0 if val[day].nil?
       val[day] += 1
       val
     end
-    total_invoices_by_day
+    total_by_day
     # require "pry"; binding.pry
     invoices_by_day = total_invoices_by_day.values
     bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
     top_days = []
-    total_invoices_by_day.each { |key, value| top_days << key if value > bar.round(0)}
+    total_by_day.each {|key, value| top_days << key if value > bar.round(0)}
     top_days
   end
 
   def pending_invoices
     total =  @se.invoices.all.length
     pending = 0
-    @se.invoices.all.each { |invoice| pending += 1 if invoice.status == :pending}
+    @se.invoices.all.each {|invoice| pending += 1 if invoice.status == :pending}
     pending_percent = (pending.to_f / total.to_f) * 100
     pending_percent.round(2)
   end
@@ -46,7 +46,7 @@ module Stats
   def shipped_invoices
     total =  @se.invoices.all.length
     shipped = 0
-    @se.invoices.all.each { |invoice| shipped += 1 if invoice.status == :shipped}
+    @se.invoices.all.each {|invoice| shipped += 1 if invoice.status == :shipped}
     shipped_percent =  (shipped.to_f / total.to_f) * 100
     shipped_percent.round(2)
   end
@@ -54,7 +54,7 @@ module Stats
   def returned_invoices
     total =  @se.invoices.all.length
     returned = 0
-    @se.invoices.all.each { |invoice| returned += 1 if invoice.status == :returned}
+    @se.invoices.all.each {|invoice| returned += 1 if invoice.status==:returned}
     returned_percent =  (returned.to_f / total.to_f) * 100
     returned_percent.round(2)
   end

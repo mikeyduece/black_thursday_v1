@@ -27,7 +27,9 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     strong_offerers = []
-    bar = average_items_per_merchant+average_items_per_merchant_standard_deviation
+    avg = average_items_per_merchant
+    std_dev = average_items_per_merchant_standard_deviation
+    bar = avg + std_dev
     merch_with_num_of_items_hash.each do |key, value|
       if value > bar
         strong_offerers << key

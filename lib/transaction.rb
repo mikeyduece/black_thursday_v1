@@ -1,7 +1,8 @@
 class Transaction
 
   attr_reader :id, :invoice_id, :credit_card_number, :result,
-              :credit_card_expiration_date, :created_at, :updated_at, :transaction_repo
+              :credit_card_expiration_date, :created_at, :updated_at,
+              :transaction_repo
 
   def initialize(params, transaction_repo = nil)
     @id                 = params[:id].to_i
