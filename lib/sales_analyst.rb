@@ -110,7 +110,6 @@ class SalesAnalyst
   #iteration 4
 
   def total_revenue_by_date(date)
-    #totals unit_price in invoice_items. invoice_items.unit_price
     invoices = invoices_by_date_hash[date]
     invoices = invoices.map do |invoice_item_id|
       invoice_i = @se.invoice_items.find_by_id(invoice_item_id)
@@ -121,8 +120,9 @@ class SalesAnalyst
 
   def top_revenue_earners(x)
     # brings in top x revenue earners, if no argument is given, just returns
-    # top 20 revenue earners
+    # top 20 revenue earners in an array
 
+    #returns ordered array by revenue (largest to small)
   end
 
   def merchants_with_pending_invoices

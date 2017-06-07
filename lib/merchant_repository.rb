@@ -43,7 +43,7 @@ class MerchantRepository
       if merchant.id == id
         return merchant
       end
-      nil
+      merchant #changed from nil
     end
   end
 

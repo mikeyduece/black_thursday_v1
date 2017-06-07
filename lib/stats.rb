@@ -113,5 +113,29 @@ module Stats
     invoices_by_date = dates.zip(invoice_ids)
   end
 
+  def invoice_ids_per_merchant_id_hash
+    invoice_items_per_merchant = []
+    merch_id_array.each do |id|
+      invoice_items_per_merchant << @se.invoices.find_all_by_merchant_id(id)
+    end
+    invoice_items_per_merchant
+    for_hash = merch_id_array.zip(invoice_items_per_merchant)
+    hash = Hash[for_hash]
+    hash.map do |key, value|
+      spec_ids = []
+      value.map { |invoice| spec_ids << invoice.id}
+    hash[key] = spec_ids
+    hash
+    end
+    hash
+  end
 
+  def merchant_ids_to_revenue_hash
+    revenue_hash = invoice_ids_per_merchant_id_hash.each do |key, value|
+      #value become arrays of inoice_item_id, each of those elements is turned into
+      #revenue, revenue is then reduced(:+) into a sum
+      #this replaces the elements in invoice_ids_per_merchant_id_hash
+      #this is then summed to give total reveneuw per merchant
+    end
+  end
 end
