@@ -10,8 +10,6 @@ require_relative '../lib/invoice_repository'
 require_relative '../lib/transaction_repo'
 require 'csv'
 
-#make pass with new argument structure
-
 class SalesAnalystTest < Minitest::Test
   include Stats
   attr_reader :se
@@ -26,6 +24,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_averages_items_per_merchant
+
     total_items = ItemRepository.new("./data/items.csv").all
     total_merchants = MerchantRepository.new("./data/merchants.csv").all
     instance = SalesAnalyst.new(se)
@@ -34,6 +33,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_items_per_mechant_standard_deviation
+
     instance = SalesAnalyst.new(se)
     info = instance.num_items_per_merchant
     result = standard_deviation(info).round(2)
@@ -41,6 +41,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_produces_array_of_highest_item_count
+
     instance = SalesAnalyst.new(se)
     strong_offerers = []
     bar = instance.average_items_per_merchant + instance.average_items_per_merchant_standard_deviation
@@ -55,6 +56,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_item_per_specific_merchant
+
     item_repository = ItemRepository.new("./data/items.csv")
     instance = SalesAnalyst.new(se)
     merchant_prices = []
@@ -67,6 +69,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_item_per_all_merchants
+
     instance = SalesAnalyst.new(se)
     prices_avgs = instance.merch_id_array.map { |id| instance.average_item_price_per_merchant(id)}
     avg_ppm = prices_avgs.reduce(:+) / prices_avgs.length
@@ -75,6 +78,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_returns_golden_items
+
     item_repository = ItemRepository.new("./data/items.csv")
     instance = SalesAnalyst.new(se)
     prices_avgs = instance.merch_id_array.map { |id| instance.average_item_price_per_merchant(id)}
@@ -93,6 +97,7 @@ class SalesAnalystTest < Minitest::Test
 #make the tests by calling from specific repositories, rather than SE
 
   def test_average_invoices_per_merchant
+
     sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     result = average(info)
@@ -100,6 +105,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_invoices_per_merchant_standard_deviation
+
     sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     result = standard_deviation(info)
@@ -107,6 +113,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_top_merchants_by_invoice_count
+
     sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     cutoff = average(info) + (standard_deviation(info) * 2)
@@ -115,6 +122,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_bottom_merchants_by_invoice_count
+
     sa = SalesAnalyst.new(se)
     info = sa.se.merchants.all.map {|merchant| merchant.invoices.count}
     cutoff = average(info) - (standard_deviation(info) * 2)
@@ -123,6 +131,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_top_days_by_invoice_count
+
     sa = SalesAnalyst.new(se)
     total_invoices_by_day = {}
     total_invoices_by_day =  sa.invoice_day.reduce({}) do |val, day|
@@ -140,32 +149,33 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_invoice_status_pending
+
     sa = SalesAnalyst.new(se)
     result = sa.pending_invoices
     assert_equal sa.invoice_status(:pending), result
   end
 
   def test_invoice_status_shipped
+
     sa = SalesAnalyst.new(se)
     result = sa.shipped_invoices
     assert_equal sa.invoice_status(:shipped), result
   end
 
   def test_invoice_status_returned
+
     sa = SalesAnalyst.new(se)
     result = sa.returned_invoices
     assert_equal sa.invoice_status(:returned), result
   end
+
+  #tests for Iteration 4
+  def test_total_revenue_by_date
+    sa = SalesAnalyst.new(se)
+    assert_equal 68175, sa.total_revenue_by_date("2000-06-14 00:00:00 -0600")
+  end
+
+
 end
 
 #
-#
-# se = SalesEngine.from_csv({ :items   => "./data/items.csv",
-#                             :merchants => "./data/merchants.csv",
-#                             :invoices => "./data/invoices.csv",
-#                             :invoice_items => "./data/invoice_items.csv",
-#                             :transactions => "./data/transactions.csv",
-#                             :customers => "./data/customers.csv"})
-#
-# sa = SalesAnalyst.new(se)
-# require 'pry';binding.pry

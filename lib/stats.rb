@@ -85,4 +85,33 @@ module Stats
     end
     merch_id_array
   end
+
+# for iteration 4: maybe make a merchant analytics module?
+
+  def invoices_by_date_hash
+    hash = {}
+    find_shipped_invoice_by_date.each do |invoice|
+      hash[invoice[0].to_s] = []
+    end
+    hash.each do |key, value|
+      find_shipped_invoice_by_date.each do |invoice|
+        value << invoice[1] if key == invoice[0].to_s
+      end
+    end
+  end
+
+  def find_shipped_invoice_by_date
+  shipped_invoices =  @se.invoices.find_all_by_status("shipped")
+    dates = []
+    invoice_ids = []
+    shipped_invoices.each do |invoice|
+      dates << invoice.created_at
+      invoice_ids << invoice.id
+    end
+    dates.sort!
+    invoice_ids.sort
+    invoices_by_date = dates.zip(invoice_ids)
+  end
+
+
 end

@@ -13,6 +13,8 @@ class SalesAnalyst
     @se = se
   end
 
+#iteration 1
+
   def average_items_per_merchant #REFACTOR FIRST
     total_items = @se.items.all
     total_merchants = @se.merchants.all
@@ -65,6 +67,8 @@ class SalesAnalyst
     golden_items
   end
 
+#iteration 2
+
   def average_invoices_per_merchant
     info = @se.merchants.all.map {|merchant| merchant.invoices.count}
     average(info)
@@ -102,4 +106,63 @@ class SalesAnalyst
       "thats not an option for invoice status"
     end
   end
+
+  #iteration 4
+
+  def total_revenue_by_date(date)
+    #totals unit_price in invoice_items. invoice_items.unit_price
+    invoices = invoices_by_date_hash[date]
+    invoices = invoices.map do |invoice_item_id|
+      invoice_i = @se.invoice_items.find_by_id(invoice_item_id)
+      invoice_i.unit_price.to_i * invoice_i.quantity
+    end
+    invoices.reduce(:+)
+  end
+
+  def top_revenue_earners(x)
+    # brings in top x revenue earners, if no argument is given, just returns
+    # top 20 revenue earners
+
+  end
+
+  def merchants_with_pending_invoices
+    #which merchants have pending invoices
+        #an invoice is considered pending if none of its transactions are
+        # succesful
+  end
+
+  def merchants_with_only_one_item
+    #ret array
+  end
+
+  def merchants_with_only_one_item_registered_in_month
+    #merchants that only sell one item by the time they registered
+  end
+
+  def revenue_by_merchant(merchant_id)
+    #finds total revenue for a single merchant
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    # returns item in array with highest quantity sold, or if ties between items, returns tying items
+    #in an array
+  end
+
+  def best_item_for_merchant(merchant_id)
+    #which item sold is best in terms of revenue generated
+  end
+
+
+
 end
+
+
+se = SalesEngine.from_csv({ :items   => "./data/items.csv",
+                            :merchants => "./data/merchants.csv",
+                            :invoices => "./data/invoices.csv",
+                            :invoice_items => "./data/invoice_items.csv",
+                            :transactions => "./data/transactions.csv",
+                            :customers => "./data/customers.csv"})
+
+sa = SalesAnalyst.new(se)
+require 'pry';binding.pry

@@ -32,7 +32,7 @@ class InvoiceItemRepo
       if invoice_item.id == id.to_s
         return invoice_item
       end
-      nil
+      invoice_item   #changed from nil
     end
   end
 
