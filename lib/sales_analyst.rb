@@ -108,8 +108,8 @@ class SalesAnalyst
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
-    require "pry"; binding.pry
-    merch = merchants_with_only_one_item
-    date = se.invoices.all.map {|invoice| Date::MONTHNAMES[invoice.created_at.month]}
+    se.all_merchants.find_all do |merch|
+      merch.items.count == 1 && merch.month_created.downcase == month.downcase
+    end
   end
 end

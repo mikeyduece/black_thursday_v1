@@ -63,4 +63,5 @@ class MerchantRepository
     return [] if all_merchants.empty?
     return all_merchants
   end
+
 end

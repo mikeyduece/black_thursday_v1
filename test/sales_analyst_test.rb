@@ -168,8 +168,9 @@ class SalesAnalystTest < Minitest::Test
 
   def test_it_can_find_merchants_with_one_item_in_one_month
     sa = SalesAnalyst.new(se)
-    actual = sa.merchants_with_only_one_item_registered_in_month("March")
+    actual = sa.merchants_with_only_one_item_registered_in_month("March").count
+    actual_1 = sa.merchants_with_only_one_item_registered_in_month("March")
     assert_equal 21, actual
-    assert_instance_of Merchant, actual[0]
+    assert_instance_of Merchant, actual_1[0]
   end
 end
