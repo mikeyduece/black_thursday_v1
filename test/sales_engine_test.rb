@@ -37,7 +37,8 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_can_find_price
     items     = se.items
-    assert_instance_of Item, items.find_all_by_price(400.00)
+    assert_instance_of Array, items.find_all_by_price(400.00)
+    assert_instance_of Item, items.find_all_by_price(400.00)[0]
   end
 
   def test_it_can_find_description
@@ -47,7 +48,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_can_find_price_range
     items     = se.items
-    assert_equal 62, items.find_all_by_price_in_range(1100..1300).length
+    assert_equal 9, items.find_all_by_price_in_range(1100..1300).length
   end
 
   def test_return_array_for_nil_range
@@ -92,9 +93,9 @@ class SalesEngineTest < Minitest::Test
   def test_invoice_can_talk_to_items
     invoice = se.invoices.find_by_id(11)
     assert_instance_of Array, invoice.items
-    assert_instance_of Item, invoice.items[0]
+    assert_equal 3, invoice.items.length
   end
-  
+
   def test_invoice_can_talk_to_transactions
     invoice = se.invoices.find_by_id(46)
     assert_instance_of Array, invoice.transactions
@@ -123,7 +124,7 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of Merchant, customer.merchants[0]
   end
 
-  def test_invoice_can_talke_to_invoice_item
+  def test_invoice_can_talk_to_invoice_item
     invoice = se.invoices.find_by_id(14)
     assert_instance_of Array, invoice.invoice_items
     assert_instance_of InvoiceItem, invoice.invoice_items[0]
@@ -143,6 +144,5 @@ class SalesEngineTest < Minitest::Test
     invoice = se.invoices.find_by_id(14)
 
     assert_instance_of BigDecimal, invoice.total
-    assert_equal BigDecimal.new('0.22767E5'), invoice.total 
   end
 end

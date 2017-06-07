@@ -12,7 +12,7 @@ class InvoiceItemRepo
   end
 
   def inspect
-    "#<#{self.class} #{@invoice_items.size} rows>"
+    "#<#{self.class} #{@all_invoice_items.size} rows>"
   end
 
   def open_all_items(filename)

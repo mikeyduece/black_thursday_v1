@@ -1,4 +1,5 @@
 require 'csv'
+require 'time'
 require_relative '../lib/sales_engine'
 require_relative '../lib/item_repository'
 require_relative '../lib/merchant_repository'
@@ -27,7 +28,9 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     strong_offerers = []
-    bar = average_items_per_merchant+average_items_per_merchant_standard_deviation
+    avg = average_items_per_merchant
+    std_dev = average_items_per_merchant_standard_deviation
+    bar = avg + std_dev
     merch_with_num_of_items_hash.each do |key, value|
       if value > bar
         strong_offerers << key
@@ -53,7 +56,7 @@ class SalesAnalyst
   end
 
   def golden_items
-    prices_avgs = se.items.all.map {|item| item.unit_price}#merch_id_array.map { |id| average_item_price_for_merchant(id)}
+    prices_avgs = se.items.all.map {|item| item.unit_price}
     price_bar = standard_deviation(prices_avgs) * 2
     golden_items = @se.items.all.find_all do |item|
       item.unit_price.to_i > price_bar
@@ -85,7 +88,7 @@ class SalesAnalyst
   end
 
   def top_days_by_invoice_count #break out to stats module
-        top_days_via_invoices
+      top_days_via_invoices
   end
 
   def invoice_status(status)
@@ -97,6 +100,16 @@ class SalesAnalyst
       return returned_invoices
     else
       "thats not an option for invoice status"
+    end
+  end
+
+  def merchants_with_only_one_item
+    se.all_merchants.find_all {|merchant| merchant.items.count == 1}
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    se.all_merchants.find_all do |merch|
+      merch.items.count == 1 && merch.month_created.downcase == month.downcase
     end
   end
 end

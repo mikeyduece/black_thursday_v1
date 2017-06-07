@@ -12,7 +12,7 @@ class TransactionRepo
   end
 
   def inspect
-    "#<#{self.class} #{@transactions.size} rows>"
+    "#<#{self.class} #{@all_transactions.size} rows>"
   end
 
   def open_all_items(filename)

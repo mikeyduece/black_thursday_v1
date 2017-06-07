@@ -5,7 +5,7 @@ class TransactionRepoTest < Minitest::Test
   attr_reader :tr
 
   def setup
-    @tr = TransactionRepo.new("./data/test_transaction.csv")
+    @tr = TransactionRepo.new("./data/test_transactions.csv")
   end
 
   def test_its_a_thing
@@ -25,9 +25,9 @@ class TransactionRepoTest < Minitest::Test
     assert_equal 1, tr.find_all_by_invoice_id(46).length
   end
 
-  def test_it_can_find_all_by_cc_num
-    assert_instance_of Array, tr.find_all_by_cc_num(4068631943231473)
-    assert_equal 1, tr.find_all_by_cc_num(4068631943231473).length
+  def test_it_can_find_all_by_credit_card_number
+    assert_instance_of Array, tr.find_all_by_credit_card_number(4068631943231473)
+    assert_equal 1, tr.find_all_by_credit_card_number(4068631943231473).length
   end
 
   def test_it_can_find_all_results

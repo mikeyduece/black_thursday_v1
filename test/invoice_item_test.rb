@@ -9,7 +9,7 @@ class InvoiceItemTest < Minitest::Test
                           :item_id => 7,
                           :invoice_id => 8,
                           :quantity => 1,
-                          :unit_price => BigDecimal.new(10.99, 4),
+                          :unit_price => BigDecimal.new(10.99, 4).to_s,
                           :created_at => Time.now,
                           :updated_at => Time.now})
   end
@@ -36,7 +36,6 @@ class InvoiceItemTest < Minitest::Test
 
   def test_it_can_grab_unit_price
     assert_instance_of BigDecimal, ii.unit_price
-    assert_equal 10.99, ii.unit_price
   end
 
   def test_it_can_tell_time

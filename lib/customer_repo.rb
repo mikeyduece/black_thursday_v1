@@ -11,7 +11,7 @@ class CustomerRepo
   end
 
   def inspect
-    "#<#{self.class} #{@customers.size} rows>"
+    "#<#{self.class} #{@all_customers.size} rows>"
   end
 
   def open_all_customers(filename)

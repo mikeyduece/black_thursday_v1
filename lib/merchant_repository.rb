@@ -12,7 +12,7 @@ class MerchantRepository
   end
 
   def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
+    "#<#{self.class} #{@all_merchants.size} rows>"
   end
 
   def open_all_items(filename)
@@ -63,4 +63,5 @@ class MerchantRepository
     return [] if all_merchants.empty?
     return all_merchants
   end
+
 end
