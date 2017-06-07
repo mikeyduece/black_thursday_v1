@@ -1,4 +1,5 @@
 require 'csv'
+require 'time'
 require_relative '../lib/sales_engine'
 require_relative '../lib/item_repository'
 require_relative '../lib/merchant_repository'
@@ -104,5 +105,11 @@ class SalesAnalyst
 
   def merchants_with_only_one_item
     se.all_merchants.find_all {|merchant| merchant.items.count == 1}
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    require "pry"; binding.pry
+    merch = merchants_with_only_one_item
+    date = se.invoices.all.map {|invoice| Date::MONTHNAMES[invoice.created_at.month]}
   end
 end
