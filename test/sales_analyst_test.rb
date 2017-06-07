@@ -159,16 +159,10 @@ class SalesAnalystTest < Minitest::Test
     result = sa.returned_invoices
     assert_equal sa.invoice_status(:returned), result
   end
-end
 
-#
-#
-# se = SalesEngine.from_csv({ :items   => "./data/items.csv",
-#                             :merchants => "./data/merchants.csv",
-#                             :invoices => "./data/invoices.csv",
-#                             :invoice_items => "./data/invoice_items.csv",
-#                             :transactions => "./data/transactions.csv",
-#                             :customers => "./data/customers.csv"})
-#
-# sa = SalesAnalyst.new(se)
-# require 'pry';binding.pry
+  def test_it_can_find_merchants_with_one_item
+    sa = SalesAnalyst.new(se)
+    assert_equal 243, sa.merchants_with_only_one_item.count
+    assert_instance_of Merchant, sa.merchants_with_only_one_item[0]
+  end
+end

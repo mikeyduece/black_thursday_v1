@@ -101,4 +101,8 @@ class SalesAnalyst
       "thats not an option for invoice status"
     end
   end
+
+  def merchants_with_only_one_item
+    se.all_merchants.find_all {|merchant| merchant.items.count == 1}
+  end
 end
