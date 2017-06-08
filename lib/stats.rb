@@ -26,9 +26,9 @@ module Stats
       val[day] += 1
       val
     end
-    total_by_day
+    # total_by_day
     # require "pry"; binding.pry
-    invoices_by_day = total_invoices_by_day.values
+    invoices_by_day = total_by_day.values
     bar = average(invoices_by_day) + standard_deviation(invoices_by_day)
     top_days = []
     total_by_day.each {|key, value| top_days << key if value > bar.round(0)}
